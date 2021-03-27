@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/memy")
+@RequestMapping(value = "/soundboard", consumes = "application/json")
 @Data
 
 public class SoundboardController {
-    @Autowired
+
     private SoundboardService service;
+
+    public SoundboardController(SoundboardService soundboardService){
+        this.service = soundboardService;
+    }
+
 }

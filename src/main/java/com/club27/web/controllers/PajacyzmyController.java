@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 
 public class PajacyzmyController {
-    @Autowired
+
     private PajacyzmyService service;
+
+    public PajacyzmyController(PajacyzmyService pajacyzmyService){
+        this.service = pajacyzmyService;
+    }
 }

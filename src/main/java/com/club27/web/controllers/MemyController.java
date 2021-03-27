@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 
 public class MemyController {
-    @Autowired
+
     private MemyService service;
+
+    public MemyController(MemyService memyService){
+        this.service = memyService;
+    }
 }

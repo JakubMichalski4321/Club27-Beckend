@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 
 public class JugoController {
-    @Autowired
+
     private JugoService service;
+
+    public JugoController(JugoService jugoService){
+        this.service = jugoService;
+    }
 
 }
