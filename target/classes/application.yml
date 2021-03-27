@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://145.239.92.211:1234/club27
+    username: club27user
+    password: club27pass
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+
+users:
+  listing:
+    pageSize: 12
