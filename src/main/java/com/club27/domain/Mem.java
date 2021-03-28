@@ -11,15 +11,18 @@ import java.util.UUID;
 @NoArgsConstructor(force = true)
 @Data
 
-public class Pajacyzmy extends BaseEntity {
+public class Mem extends BaseEntity {
 
-    private final String content;
+    private final String title;
     private final String author;
+    private final String imagePath;
+    private final int memeLikes;
 
-    public Pajacyzmy(UUID id, String content, String author) {
+    public Mem(UUID id, String title, String author, String imagePath, int memeLikes) {
         super(id);
-        this.content = content;
+        this.title = title;
         this.author = author;
+        this.imagePath = imagePath;
+        this.memeLikes = memeLikes;
     }
-
 }
