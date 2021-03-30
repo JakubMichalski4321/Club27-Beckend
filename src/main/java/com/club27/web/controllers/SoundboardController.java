@@ -29,7 +29,7 @@ public class SoundboardController {
         this.service = soundboardService;
     }
 
-    @GetMapping("/getAllSoundboard")
+    @GetMapping("/allSoundboard")
     public ResponseEntity<List<SoundboardDto>> getAllSoundboard(){
         log.debug("getting all soundboards");
         var soundboards = service.getAllSoundboards();

@@ -29,7 +29,7 @@ public class JugoController {
         this.service = jugoService;
     }
 
-    @GetMapping("/getAllJugo")
+    @GetMapping("/allJugo")
     public ResponseEntity<List<JugoDto>> getAllSoundboard(){
         log.debug("getting all Jugo");
         var jugos = service.getAllJugo();
