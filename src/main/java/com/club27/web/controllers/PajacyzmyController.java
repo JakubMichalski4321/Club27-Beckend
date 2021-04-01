@@ -7,11 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,5 +31,12 @@ public class PajacyzmyController {
         log.debug("getting all pajacyzmy");
         var pajacyzmy = service.getAllPajacyzmy();
         return new ResponseEntity<>(pajacyzmy, HttpStatus.OK);
+    }
+
+    @PostMapping("submitPajacyzm")
+    public ResponseEntity<Void> submitPajacyzm(@Valid @RequestBody PajacyzmDto pajacyzm){
+        log.debug("submit pajacyzm called, " + pajacyzm.toString());
+        service.submitPajacyzm(pajacyzm);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -1,10 +1,14 @@
 package com.club27.services;
 
+import com.club27.domain.Pajacyzm;
 import com.club27.repositories.PajacyzmyRepository;
 import com.club27.web.dto.PajacyzmDto;
 import com.club27.web.mappers.PajacyzmMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.awt.print.PrinterJob;
 import java.util.List;
 
 
@@ -23,4 +27,12 @@ public class PajacyzmyService {
         return pajacyzmMapper.mapAll(pajacyzmyAll);
     }
 
+    @Transactional(rollbackOn = {})
+    public void submitPajacyzm(PajacyzmDto pajacyzm) {
+
+        var pajacyzm = new Pajacyzm(
+                pajacyzm.
+        )
+
+    }
 }
