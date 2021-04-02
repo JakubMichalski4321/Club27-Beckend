@@ -8,8 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.awt.print.PrinterJob;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -22,17 +22,21 @@ public class PajacyzmyService {
         this.pajacyzmMapper = pajacyzmMapper;
     }
 
+    @Transactional
+    public PajacyzmDto getPajacyzm(UUID id) {
+        var pajacyzm = pajacyzmyRepository.findById(id);
+        return pajacyzmMapper.pajacyzmOptionalToDto(pajacyzm);
+    }
+
     public List<PajacyzmDto> getAllPajacyzmy() {
         var pajacyzmyAll = pajacyzmyRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
         return pajacyzmMapper.mapAll(pajacyzmyAll);
     }
 
-    @Transactional(rollbackOn = {})
-    public void submitPajacyzm(PajacyzmDto pajacyzm) {
-
-        var pajacyzm = new Pajacyzm(
-                pajacyzm.
-        )
-
+    @Transactional
+    public void submitPajacyzm(PajacyzmDto pajacyzmDto) {
+        var pajacyzm = new Pajacyzm(pajacyzmDto.getContent(), pajacyzmDto.getAuthor());
+        pajacyzmyRepository.save(pajacyzm);
     }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,6 +25,12 @@ public class PajacyzmyController {
 
     public PajacyzmyController(PajacyzmyService pajacyzmyService){
         this.service = pajacyzmyService;
+    }
+
+    @GetMapping("/{pajacyzmId}")
+    public ResponseEntity<PajacyzmDto> getPajacyzm(@PathVariable("pajacyzmId") UUID id){
+        var pajacyzm = service.getPajacyzm(id);
+        return new ResponseEntity<>(pajacyzm, HttpStatus.OK);
     }
 
     @GetMapping("/allPajacyzmy")

@@ -1,19 +1,23 @@
 package com.club27.domain;
 
-import com.club27.web.dto.PajacyzmDto;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
-import java.util.List;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.UUID;
-import java.util.function.Function;
 
-@Entity
-@NoArgsConstructor(force = true)
 @Data
-
+@Entity(name = "pajacyzm")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoArgsConstructor(force = true)
 public class Pajacyzm extends BaseEntity {
+
+    public Pajacyzm(String content, String author) {
+        super();
+        this.content = content;
+        this.author = author;
+    }
 
     public Pajacyzm(UUID id, String content, String author) {
         super(id);
@@ -21,12 +25,6 @@ public class Pajacyzm extends BaseEntity {
         this.author = author;
     }
 
-    private final String content;
-    private final String author;
-
-    public Pajacyzm(String content, String author){
-        this.content = content;
-        this.author = author;
-    }
-
+    private String content;
+    private String author;
 }

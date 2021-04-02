@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,6 +19,15 @@ public class PajacyzmMapper {
                 pajacyzm.getContent(),
                 pajacyzm.getAuthor(),
                 pajacyzm.getCreatedDate()
+        );
+    }
+
+    public PajacyzmDto pajacyzmOptionalToDto(Optional<Pajacyzm> pajacyzm){
+        return new PajacyzmDto(
+                pajacyzm.get().getId(),
+                pajacyzm.get().getContent(),
+                pajacyzm.get().getAuthor(),
+                pajacyzm.get().getCreatedDate()
         );
     }
 
