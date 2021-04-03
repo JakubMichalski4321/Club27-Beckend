@@ -6,17 +6,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
-@NoArgsConstructor(force = true)
 @Data
-
+@Entity(name = "mem")
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor(force = true)
 public class Mem extends BaseEntity {
-
-    private final String title;
-    private final String author;
-    private final String imagePath;
-    private final int memeLikes;
 
     public Mem(UUID id, String title, String author, String imagePath, int memeLikes) {
         super(id);
@@ -25,4 +19,17 @@ public class Mem extends BaseEntity {
         this.imagePath = imagePath;
         this.memeLikes = memeLikes;
     }
+
+    public Mem(String title, String author, String imagePath, int memeLikes){
+        super();
+        this.title = title;
+        this.author = author;
+        this.imagePath = imagePath;
+        this.memeLikes = memeLikes;
+    }
+
+    private String title;
+    private String author;
+    private String imagePath;
+    private int memeLikes;
 }
