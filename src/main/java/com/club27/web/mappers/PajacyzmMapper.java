@@ -4,7 +4,6 @@ import com.club27.domain.Pajacyzm;
 import com.club27.web.dto.PajacyzmDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

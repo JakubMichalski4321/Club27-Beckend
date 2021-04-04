@@ -1,10 +1,8 @@
 package com.club27.services;
 
 import com.club27.domain.Mem;
-import com.club27.domain.Pajacyzm;
 import com.club27.repositories.MemyRepository;
 import com.club27.web.dto.MemDto;
-import com.club27.web.dto.PajacyzmDto;
 import com.club27.web.mappers.MemMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

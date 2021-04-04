@@ -1,19 +1,15 @@
 package com.club27.web.controllers;
 
 import com.club27.services.SoundboardService;
-import com.club27.web.dto.PajacyzmDto;
 import com.club27.web.dto.SoundboardDto;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -29,11 +25,24 @@ public class SoundboardController {
         this.service = soundboardService;
     }
 
+    @GetMapping("/{soundboardId}")
+    public ResponseEntity<SoundboardDto> getSoundboard(@PathVariable("soundboardId") UUID id){
+        var soundboard = service.getSoundboard(id);
+        return new ResponseEntity<>(soundboard, HttpStatus.OK);
+    }
+
     @GetMapping("/allSoundboard")
     public ResponseEntity<List<SoundboardDto>> getAllSoundboard(){
         log.debug("getting all soundboards");
         var soundboards = service.getAllSoundboards();
         return new ResponseEntity<>(soundboards, HttpStatus.OK);
+    }
+
+    @PostMapping("submitSoundboard")
+    public ResponseEntity<Void> submitSoundboard(@Valid @RequestBody SoundboardDto soundboardDto){
+        log.debug("submit soundboard called, " + soundboardDto.toString());
+        service.submitSoundboard(soundboardDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

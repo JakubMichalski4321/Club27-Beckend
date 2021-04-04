@@ -2,7 +2,6 @@ package com.club27.web.mappers;
 
 import com.club27.domain.Jugo;
 import com.club27.web.dto.JugoDto;
-import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
