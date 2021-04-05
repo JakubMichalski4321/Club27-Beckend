@@ -6,7 +6,6 @@ import com.club27.web.dto.MemDto;
 import com.club27.web.mappers.MemMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;

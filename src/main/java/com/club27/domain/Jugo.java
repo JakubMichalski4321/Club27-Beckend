@@ -1,24 +1,26 @@
 package com.club27.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.UUID;
 
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
-@NoArgsConstructor(force = true)
 @Data
-
+@Entity(name = "jugo")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoArgsConstructor(force = true)
 public class Jugo extends BaseEntity{
 
-    private final String title;
-    private final String videoURL;
-    private final String videoComment;
-    private final int videoLikes;
+    public Jugo(String title, String videoURL, String videoComment, int videoLikes) {
+        super();
+        this.title = title;
+        this.videoURL = videoURL;
+        this.videoComment = videoComment;
+        this.videoLikes = videoLikes;
+    }
 
     public Jugo(UUID id, String title, String videoURL, String videoComment, int videoLikes) {
         super(id);
@@ -27,5 +29,10 @@ public class Jugo extends BaseEntity{
         this.videoComment = videoComment;
         this.videoLikes = videoLikes;
     }
+
+    private String title;
+    private String videoURL;
+    private String videoComment;
+    private int videoLikes;
 
 }
