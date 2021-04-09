@@ -3,10 +3,16 @@ package com.club27.services;
 import com.club27.domain.Mem;
 import com.club27.repositories.MemyRepository;
 import com.club27.web.dto.MemDto;
+import com.club27.web.dto.MemToUploadDto;
 import com.club27.web.mappers.MemMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,8 +38,16 @@ public class MemyService {
     }
 
     @Transactional
-    public void submitMem(MemDto memDto) {
-        var mem = new Mem(memDto.getTitle(), memDto.getAuthor(), memDto.getImagePath(), memDto.getMemeLikes());
+    public void submitMemWithUrl(MemToUploadDto memToUploadDto) {
+        var mem = new Mem(memToUploadDto.getTitle(), memToUploadDto.getAuthor(), memToUploadDto.getImagePath(), 0);
         memyRepository.save(mem);
+    }
+
+    public void submitFile(MultipartFile file) throws IOException {
+        System.out.println("Image upload");
+        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\";
+        byte[] fileInBytes = file.getBytes();
+        Path path = Paths.get(saveFileDir + file.getOriginalFilename());
+        Files.write(path, fileInBytes);
     }
 }
