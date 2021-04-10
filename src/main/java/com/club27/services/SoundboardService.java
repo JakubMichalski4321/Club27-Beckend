@@ -6,8 +6,13 @@ import com.club27.web.dto.SoundboardDto;
 import com.club27.web.mappers.SoundboardMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,5 +42,13 @@ public class SoundboardService {
     public void submitSoundboard(SoundboardDto soundboardDto) {
         var soundboard = new Soundboard(soundboardDto.getId(), soundboardDto.getTitle(), soundboardDto.getWhoIs(), soundboardDto.getPathToFile());
         soundboardRepository.save(soundboard);
+    }
+
+    public void submitSoundboardSound(MultipartFile file) throws IOException {
+        System.out.println("Soundboard upload");
+        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\soundboard\\";
+        byte[] fileInBytes = file.getBytes();
+        Path path = Paths.get(saveFileDir + file.getOriginalFilename());
+        Files.write(path, fileInBytes);
     }
 }
