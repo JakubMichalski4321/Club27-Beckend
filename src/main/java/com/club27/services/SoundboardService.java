@@ -8,7 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,9 +48,9 @@ public class SoundboardService {
 
     public void submitSoundboardSound(MultipartFile file) throws IOException {
         System.out.println("Soundboard upload");
-        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\soundboard\\";
-        byte[] fileInBytes = file.getBytes();
-        Path path = Paths.get(saveFileDir + file.getOriginalFilename());
-        Files.write(path, fileInBytes);
+        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\";
+        File fileJava = new File(saveFileDir + file.getOriginalFilename());
+        file.transferTo(fileJava);
     }
+
 }
