@@ -1,5 +1,6 @@
 package com.club27.services;
 
+import antlr.StringUtils;
 import com.club27.domain.Soundboard;
 import com.club27.repositories.SoundboardRepository;
 import com.club27.web.dto.SoundboardDto;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,10 +49,8 @@ public class SoundboardService {
     }
 
     public void submitSoundboardSound(MultipartFile file) throws IOException {
-        System.out.println("Soundboard upload");
-        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\";
-        File fileJava = new File(saveFileDir + file.getOriginalFilename());
-        file.transferTo(fileJava);
+        String saveFileDir = "C:\\Users\\1234c\\Desktop\\club27\\club27-frontend\\src\\assets\\" + file.getOriginalFilename();
+        file.transferTo(new File(saveFileDir));
     }
 
 }
