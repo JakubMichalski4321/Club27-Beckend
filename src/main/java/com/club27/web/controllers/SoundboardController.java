@@ -52,21 +52,6 @@ public class SoundboardController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/submitSoundboardSound2")
-    public ResponseEntity<Void> submitSound2(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
-        log.debug("submit file saved called, " + file.toString());
-        System.out.println("1");
-        try {
-            service.submitSoundboardSound(file);
-            System.out.println("3");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.valueOf("File save failed"));
-        }
-        redirectAttributes.addFlashAttribute("message", "Successfully uploaded");
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
     @RequestMapping(value = "/submitSoundboardSound", method = RequestMethod.POST, headers = {"Content-Type=multipart/form-data"})
     @ResponseBody
     public  ResponseEntity<Void> create(@RequestBody MultipartFile file) {
