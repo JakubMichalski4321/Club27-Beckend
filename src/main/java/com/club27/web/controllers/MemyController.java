@@ -37,7 +37,7 @@ public class MemyController {
     }
 
     @GetMapping("/allMemy")
-    public ResponseEntity<List<MemDto>> getAllPajacyzmy(){
+    public ResponseEntity<List<MemDto>> getAllMemy(){
         log.debug("getting all memy");
         var memy = service.getAllMemy();
         return new ResponseEntity<>(memy, HttpStatus.OK);

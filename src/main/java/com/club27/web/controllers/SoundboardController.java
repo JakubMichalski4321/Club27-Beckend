@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/soundboard", consumes = "application/json")
+@RequestMapping(value = "/soundboard")
 @Data
 @Slf4j
 
