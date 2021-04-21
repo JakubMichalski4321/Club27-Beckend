@@ -26,3 +26,6 @@ VALUES ('5e5e850b-8799-4b3b-8403-cfbde120240c', CURRENT_TIMESTAMP, 'pajacyzm.mp3
 
 INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
 VALUES ('5e5e850b-8799-4b3b-8403-cfbde120270c', CURRENT_TIMESTAMP, 'pajacyzm.mp3', 'wowowo', 'Pajac');
+
+INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
+VALUES ('5e5e850b-8799-4b3b-8403-cfbde120271c', CURRENT_TIMESTAMP, 'recznik.mp3', 'recznik', 'Jackob');
