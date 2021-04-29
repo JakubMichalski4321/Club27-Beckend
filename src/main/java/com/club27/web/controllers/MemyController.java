@@ -43,6 +43,13 @@ public class MemyController {
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }
 
+    @GetMapping("/{memId}/addLike")
+    public ResponseEntity<Void> giveOneLike(@PathVariable("memId") UUID id) throws Exception {
+        log.debug("give one like to mem" + id);
+        service.giveOneLike(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/submitMeme")
     public ResponseEntity<Void> submitMemWithUrl(@Valid @RequestBody MemToUploadDto mem){
         log.debug("submit mem called, " + mem.toString());

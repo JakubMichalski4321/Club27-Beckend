@@ -38,6 +38,15 @@ public class MemyService {
     }
 
     @Transactional
+    public void giveOneLike(UUID id) throws Exception {
+        var mem = memyRepository.findById(id);
+        if(mem.isEmpty()){
+            throw new Exception("Cannot find the record");
+        }
+        mem.get().setMemeLikes(mem.get().getMemeLikes() + 1);
+    }
+
+    @Transactional
     public void submitMemWithUrl(MemToUploadDto memToUploadDto) {
         var mem = new Mem(memToUploadDto.getTitle(), memToUploadDto.getAuthor(), memToUploadDto.getImagePath(), 0);
         memyRepository.save(mem);
