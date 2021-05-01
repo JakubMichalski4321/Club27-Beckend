@@ -1,9 +1,8 @@
 package com.club27.web.controllers;
 
+import com.club27.domain.Comment;
 import com.club27.services.MemyService;
-import com.club27.web.dto.MemDto;
-import com.club27.web.dto.MemToUploadDto;
-import com.club27.web.dto.MemToUploadImageDto;
+import com.club27.web.dto.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -43,8 +42,8 @@ public class MemyController {
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }
 
-    @GetMapping("/{memId}/addLike")
-    public ResponseEntity<Void> giveOneLike(@PathVariable("memId") UUID id) throws Exception {
+    @GetMapping("/{memeId}/addLike")
+    public ResponseEntity<Void> giveOneLike(@PathVariable("memeId") UUID id) throws Exception {
         log.debug("give one like to mem" + id);
         service.giveOneLike(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -69,4 +68,17 @@ public class MemyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/{memeId}/getAllComments")
+    public ResponseEntity<List<CommentDto>> getMemeAllComments(@PathVariable("memeId") UUID id) throws Exception {
+        log.debug("getting all comments for meme: " + id);
+        var commentsList = service.getThisMemComments(id);
+        return new ResponseEntity<>(commentsList, HttpStatus.OK);
+    }
+
+    @PostMapping("/submitMemeComment")
+    public ResponseEntity<Void> submitMemeComment(@Valid @RequestBody CommentToUploadDto comment) throws Exception {
+        log.debug("submit comment called, " + comment.toString());
+        service.submitMemComment(comment);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

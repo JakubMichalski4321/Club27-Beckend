@@ -198,17 +198,5 @@ INSERT INTO public.soundboard(id, title, who_is, path_to_file, created_date) VAL
 (uuid_generate_v4(), 'Wojtek... ile jest?', 'wojtek', '2020-11-23-01_56_36-ile_jest.mp3', TO_TIMESTAMP('2020-11-23 01:56:36', 'YYYY-MM-DD hh24_mi_ss')),
 (uuid_generate_v4(), 'wojtekSieZapowietrza', 'wojtek', '2020-11-23-02_07_32-wojtekSieZapowietrza.mp3', TO_TIMESTAMP('2020-11-23 02:07:32', 'YYYY-MM-DD hh24_mi_ss')),
 (uuid_generate_v4(), 'dal ci Pan Bóg szansę', 'seba', '2021-01-07-12_19_30-dalciPanBógszansę.mp3', TO_TIMESTAMP('2021-01-07 12:19:30', 'YYYY-MM-DD hh24_mi_ss')),
-(uuid_generate_v4(), 'Kuba na lapku', 'jackob', '2021-02-18-00_52_00-kuba-laptop.mp3', TO_TIMESTAMP('2021-02-18 00:52:00', 'YYYY-MM-DD hh24_mi_ss'));
+('5e5e850b-8799-4b3b-8403-cfbde120515c', 'Kuba na lapku', 'jackob', '2021-02-18-00_52_00-kuba-laptop.mp3', TO_TIMESTAMP('2021-02-18 00:52:00', 'YYYY-MM-DD hh24_mi_ss'));
 
-INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
-VALUES ('5e5e850b-8799-4b3b-8403-cfbde120210c', CURRENT_TIMESTAMP, 'pajacyzm.mp3', 'eloelo', 'Pajac');
-
-INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
-VALUES ('5e5e850b-8799-4b3b-8403-cfbde120240c', CURRENT_TIMESTAMP, 'pajacyzm.mp3', 'xDDDD', 'Pajac');
-
-
-INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
-VALUES ('5e5e850b-8799-4b3b-8403-cfbde120270c', CURRENT_TIMESTAMP, 'pajacyzm.mp3', 'wowowo', 'Pajac');
-
-INSERT INTO public.soundboard(id, created_date, path_to_file, title, who_is)
-VALUES ('5e5e850b-8799-4b3b-8403-cfbde120271c', CURRENT_TIMESTAMP, 'recznik.mp3', 'recznik', 'Jackob');

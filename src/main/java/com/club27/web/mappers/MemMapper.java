@@ -1,6 +1,8 @@
 package com.club27.web.mappers;
 
+import com.club27.domain.Comment;
 import com.club27.domain.Mem;
+import com.club27.web.dto.CommentDto;
 import com.club27.web.dto.MemDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -37,5 +39,18 @@ public class MemMapper {
     public List<MemDto> mapAll(List<Mem> list){
         return list.stream().map(this::memToDto).collect(Collectors.toList());
     }
+
+    private CommentDto commentToCommentDto(Comment comment) {
+        return new CommentDto(
+                comment.getContent(),
+                comment.getAuthor(),
+                comment.getCreatedDate()
+        );
+    }
+
+    public List<CommentDto> mapAllMemeComments(List<Comment> list){
+        return list.stream().map(this::commentToCommentDto).collect(Collectors.toList());
+    }
+
 
 }

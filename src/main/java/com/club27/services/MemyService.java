@@ -1,7 +1,11 @@
 package com.club27.services;
 
 import com.club27.domain.Mem;
+import com.club27.domain.Comment;
+import com.club27.repositories.CommentRepository;
 import com.club27.repositories.MemyRepository;
+import com.club27.web.dto.CommentDto;
+import com.club27.web.dto.CommentToUploadDto;
 import com.club27.web.dto.MemDto;
 import com.club27.web.dto.MemToUploadDto;
 import com.club27.web.mappers.MemMapper;
@@ -14,15 +18,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class MemyService {
     private final MemyRepository memyRepository;
+    private final CommentRepository commentRepository;
     private final MemMapper mapper;
 
-    public MemyService(MemyRepository memyRepository, MemMapper mapper) {
+    public MemyService(MemyRepository memyRepository, CommentRepository commentRepository, MemMapper mapper) {
         this.memyRepository = memyRepository;
+        this.commentRepository = commentRepository;
         this.mapper = mapper;
     }
 
@@ -59,4 +66,25 @@ public class MemyService {
         Path path = Paths.get(saveFileDir + file.getOriginalFilename());
         Files.write(path, fileInBytes);
     }
+
+    public List<CommentDto> getThisMemComments(UUID id) throws Exception {
+        var selectedMeme = memyRepository.findById(id);
+        if(selectedMeme.isEmpty()){
+            throw new Exception("Cannot find the record");
+        }
+        return mapper.mapAllMemeComments(selectedMeme.get().getMemeComments());
+    }
+
+    @Transactional
+    public void submitMemComment(CommentToUploadDto comment) throws Exception {
+        Optional<Mem> selectedMeme = memyRepository.findById(comment.getMemeId());
+        if(selectedMeme.isEmpty()){
+            throw new Exception("Cannot find the record");
+        }
+        var commentToSave = new Comment(comment.getContent(), comment.getAuthor(), selectedMeme.get());
+        commentToSave.setMem(selectedMeme.get());
+        selectedMeme.get().getMemeComments().add(commentToSave);
+        commentRepository.save(commentToSave);
+    }
+
 }
