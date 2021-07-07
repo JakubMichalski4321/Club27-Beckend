@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/memy")
+@RequestMapping("/meme")
 @Data
 @Slf4j
 

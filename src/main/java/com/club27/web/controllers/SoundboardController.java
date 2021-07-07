@@ -52,7 +52,7 @@ public class SoundboardController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/submitSoundboardSound", method = RequestMethod.POST, headers = {"Content-Type=multipart/form-data"})
+    @RequestMapping(value = "/soundboard-sound-submit", method = RequestMethod.POST, headers = {"Content-Type=multipart/form-data"})
     @ResponseBody
     public  ResponseEntity<Void> create(@RequestBody MultipartFile file) {
         try {
