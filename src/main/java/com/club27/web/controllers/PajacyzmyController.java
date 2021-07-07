@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/pajacyzmy")
 @Data
 @Slf4j
@@ -32,14 +32,14 @@ public class PajacyzmyController {
         return new ResponseEntity<>(pajacyzm, HttpStatus.OK);
     }
 
-    @GetMapping("/allPajacyzmy")
+    @GetMapping("/pajacyzmy-all")
     public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(){
         log.debug("getting all pajacyzmy");
         var pajacyzmy = service.getAllPajacyzmy();
         return new ResponseEntity<>(pajacyzmy, HttpStatus.OK);
     }
 
-    @PostMapping("submitPajacyzm")
+    @PostMapping("/pajacyzm-submit")
     public ResponseEntity<Void> submitPajacyzm(@Valid @RequestBody PajacyzmDto pajacyzm){
         log.debug("submit pajacyzm called, " + pajacyzm.toString());
         service.submitPajacyzm(pajacyzm);

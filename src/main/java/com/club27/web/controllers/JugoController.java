@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/jugo")
 @Data
 @Slf4j
@@ -31,14 +31,14 @@ public class JugoController {
         return new ResponseEntity<>(jugo, HttpStatus.OK);
     }
 
-    @GetMapping("/allJugo")
+    @GetMapping("/jugo-all")
     public ResponseEntity<List<JugoDto>> getAllSoundboard(){
         log.debug("getting all Jugo");
         var jugos = service.getAllJugo();
         return new ResponseEntity<>(jugos, HttpStatus.OK);
     }
 
-    @PostMapping("submitJugo")
+    @PostMapping("/jugo-submit")
     public ResponseEntity<Void> submitJugo(@Valid @RequestBody JugoDto jugoDto){
         log.debug("submit jugo called, " + jugoDto.toString());
         service.submitJugo(jugoDto);

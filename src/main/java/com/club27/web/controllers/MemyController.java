@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/memy")
 @Data
 @Slf4j
@@ -35,28 +35,28 @@ public class MemyController {
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
 
-    @GetMapping("/allMemy")
+    @GetMapping("/meme-all")
     public ResponseEntity<List<MemDto>> getAllMemy(){
         log.debug("getting all memy");
         var memy = service.getAllMemy();
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }
 
-    @GetMapping("/{memeId}/addLike")
+    @GetMapping("/{memeId}/like-add")
     public ResponseEntity<Void> giveOneLike(@PathVariable("memeId") UUID id) throws Exception {
         log.debug("give one like to mem" + id);
         service.giveOneLike(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/submitMeme")
+    @PostMapping("/meme-submit")
     public ResponseEntity<Void> submitMemWithUrl(@Valid @RequestBody MemToUploadDto mem){
         log.debug("submit mem called, " + mem.toString());
         service.submitMemWithUrl(mem);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/submitMemeImage")
+    @PostMapping("/meme-image-submit")
     public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file", required = true) MultipartFile file){
         log.debug("submit file saved called, " + file.toString());
         try {
@@ -68,14 +68,14 @@ public class MemyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{memeId}/getAllComments")
+    @GetMapping("/{memeId}/comments-all")
     public ResponseEntity<List<CommentDto>> getMemeAllComments(@PathVariable("memeId") UUID id) throws Exception {
         log.debug("getting all comments for meme: " + id);
         var commentsList = service.getThisMemComments(id);
         return new ResponseEntity<>(commentsList, HttpStatus.OK);
     }
 
-    @PostMapping("/submitMemeComment")
+    @PostMapping("/meme-comment-submit")
     public ResponseEntity<Void> submitMemeComment(@Valid @RequestBody CommentToUploadDto comment) throws Exception {
         log.debug("submit comment called, " + comment.toString());
         service.submitMemComment(comment);

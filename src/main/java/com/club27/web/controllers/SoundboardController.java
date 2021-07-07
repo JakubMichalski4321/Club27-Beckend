@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/soundboard")
 @Data
 @Slf4j
@@ -38,14 +38,14 @@ public class SoundboardController {
         return new ResponseEntity<>(soundboard, HttpStatus.OK);
     }
 
-    @GetMapping("/allSoundboard")
+    @GetMapping("/all-soundboard")
     public ResponseEntity<List<SoundboardDto>> getAllSoundboard(){
         log.debug("getting all soundboards");
         var soundboards = service.getAllSoundboards();
         return new ResponseEntity<>(soundboards, HttpStatus.OK);
     }
 
-    @PostMapping("/submitSoundboard")
+    @PostMapping("/soundboard-submit")
     public ResponseEntity<Void> submitSoundboard(@Valid @RequestBody SoundboardDto soundboardDto){
         log.debug("submit soundboard called, " + soundboardDto.toString());
         service.submitSoundboard(soundboardDto);
