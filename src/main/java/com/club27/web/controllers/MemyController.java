@@ -37,14 +37,14 @@ public class MemyController {
 
     @GetMapping("/meme-all")
     public ResponseEntity<List<MemDto>> getAllMemy(){
-        log.debug("getting all memy");
+        log.info("getting all memy");
         var memy = service.getAllMemy();
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }
 
     @GetMapping("/{memeId}/like-add")
     public ResponseEntity<Void> giveOneLike(@PathVariable("memeId") UUID id) throws Exception {
-        log.debug("give one like to mem" + id);
+        log.info("give one like to meme : " + id);
         service.giveOneLike(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
