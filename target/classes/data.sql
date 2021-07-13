@@ -54,7 +54,10 @@ INSERT INTO public.pajacyzm(id, content, author, created_date) VALUES
 (uuid_generate_v4(), '0505 Lea Mill', 'Seamless', TO_TIMESTAMP('2021-03-02', 'YYYY-MM-DD')),
 (uuid_generate_v4(), 'kurwaball', 'Nowy mistrz w valo', TO_TIMESTAMP('2021-03-05', 'YYYY-MM-DD')),
 (uuid_generate_v4(), '3505 Ksenofont Drive', 'North Korean Won', TO_TIMESTAMP( '2021-04-05', 'YYYY-MM-DD')),
-(uuid_generate_v4(), 'Zapomniałem o was, bo tu bawię się i śmieje w najlepsze', 'Pajac', TO_TIMESTAMP('2021-04-24', 'YYYY-MM-DD'));
+(uuid_generate_v4(), 'Zapomniałem o was, bo tu bawię się i śmieje w najlepsze', 'Pajac', TO_TIMESTAMP('2021-04-24', 'YYYY-MM-DD')),
+(uuid_generate_v4(), 'Chciałbym porozmawiać o tym, że co myślą na temat tego, że nasz świat stworzyli kosmici, a jednym z Nich jest Bóg.', 'Pajac', TO_TIMESTAMP('2021-05-20', 'YYYY-MM-DD')),
+(uuid_generate_v4(), 'Ognisko w ścianie, znaczy kominek', 'Imprezowicz Pati', TO_TIMESTAMP('2021-05-26', 'YYYY-MM-DD')),
+(uuid_generate_v4(), 'To nie ja, to opaska', 'Fit Patryk', TO_TIMESTAMP('2021-06-10', 'YYYY-MM-DD')), (uuid_generate_v4(), 'Ciężko pracuje w łóżku', 'Ten co robi ważne rzeczy', TO_TIMESTAMP('2021-06-22', 'YYYY-MM-DD'));
 
 INSERT INTO public.mem(id, title, author, created_date, image_path, meme_likes) VALUES
 (uuid_generate_v4(), 'Pierwszy mem', 'no ja a kto', TO_TIMESTAMP('2020-02-04', 'YYYY-MM-DD'), 'dudaaa.jpg', 2),
@@ -130,7 +133,8 @@ INSERT INTO public.mem(id, title, author, created_date, image_path, meme_likes) 
 (uuid_generate_v4(), 'Niech żyje wolność słowa*!! ', 'Prezydent 27', TO_TIMESTAMP('2021-02-15 12:37:01', 'YYYY-MM-DD hh24:mi:ss'), '2021-02-15-12_37_01-Screenshot_20210215_122915.jpg', 4),
 (uuid_generate_v4(), 'Partia Znacznie Pajacowo Radykalna', '', TO_TIMESTAMP('2021-02-28 15:26:49', 'YYYY-MM-DD hh24:mi:ss'), '2021-02-28-15_26_50-PicsArt_02-28-03.24.07.jpg', 1),
 (uuid_generate_v4(), 'Pajac Update', 'Å»yd', TO_TIMESTAMP('2021-03-13 18:27:40', 'YYYY-MM-DD hh24:mi:ss'), '2021-03-13-18_27_40-2021-02-28-15_26_50-PicsArt_02-28-03.24.07.jpg', 1),
-(uuid_generate_v4(), 'Wszysdkiego Najlepszego!', 'Denciak', TO_TIMESTAMP('2021-04-07 18:31:02', 'YYYY-MM-DD hh24:mi:ss'), '2021-04-07-18_31_02-Sebauro.jpeg', 6);
+(uuid_generate_v4(), 'Wszysdkiego Najlepszego!', 'Denciak', TO_TIMESTAMP('2021-04-07 18:31:02', 'YYYY-MM-DD hh24:mi:ss'), '2021-04-07-18_31_02-Sebauro.jpeg', 6),
+('7aaf8ec9-74c4-4878-aedd-e525894dbac3', 'Fit Patryk', 'Jackob', TO_TIMESTAMP('2021-06-10 10:24:11', 'YYYY-MM-DD hh24:mi:ss'), '1623313442472_FitPatryk.jpg', 0);
 
 INSERT INTO public.soundboard(id, title, who_is, path_to_file, created_date) VALUES
 (uuid_generate_v4(), 'krzesło info', 'jackob', '2020-03-01-01_19_36-asdgsdgs_kurwa_debilu_jebany.mp3', TO_TIMESTAMP('2020-03-01 01_19_36', 'YYYY-MM-DD hh24_mi_ss')),
@@ -200,3 +204,37 @@ INSERT INTO public.soundboard(id, title, who_is, path_to_file, created_date) VAL
 (uuid_generate_v4(), 'dal ci Pan Bóg szansę', 'seba', '2021-01-07-12_19_30-dalciPanBógszansę.mp3', TO_TIMESTAMP('2021-01-07 12:19:30', 'YYYY-MM-DD hh24_mi_ss')),
 ('5e5e850b-8799-4b3b-8403-cfbde120515c', 'Kuba na lapku', 'jackob', '2021-02-18-00_52_00-kuba-laptop.mp3', TO_TIMESTAMP('2021-02-18 00:52:00', 'YYYY-MM-DD hh24_mi_ss'));
 
+INSERT INTO public.jugo (id, title, videoURL, created_date, video_comment, video_likes) VALUES
+(uuid_generate_v4(), 'O kurwa.. o kurwa!', 'https://www.youtube.com/embed/dapWtvZpUTw', TO_TIMESTAMP('2020-03-13 17:54:50', 'YYYY-MM-DD hh24_mi_ss'), 'Clacz by wojtek', 2),
+(uuid_generate_v4(), 'super clutchyk', 'https://www.youtube.com/embed/iXkvkQoAfUw', TO_TIMESTAMP('2020-03-15 00:06:17', 'YYYY-MM-DD hh24_mi_ss'), 'xD', 0),
+(uuid_generate_v4(), 'clutch v2', 'https://www.youtube.com/embed/KQhst7EJJ6k', TO_TIMESTAMP('2020-03-15 00:09:11', 'YYYY-MM-DD hh24_mi_ss'), 'ez', 0),
+(uuid_generate_v4(), 'Ten Jackob to najlepszy', 'https://www.youtube.com/embed/aonNUCwyUJ8', TO_TIMESTAMP('2020-03-19 11:40:24', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'NoÅ¼owanie Seby i zarÄ…bisty Jackob', 'https://www.youtube.com/embed/U5WFH3sCJ7w', TO_TIMESTAMP('2020-03-21 21:10:02', 'YYYY-MM-DD hh24_mi_ss'), 'xD', 0),
+(uuid_generate_v4(), 'BÄ™dÄ… problemy..', 'https://www.youtube.com/embed/bcv0rhhD3_o', TO_TIMESTAMP('2020-04-03 02:08:13', 'YYYY-MM-DD hh24_mi_ss'), 'Seba na B', 2),
+(uuid_generate_v4(), 'Seba sniki biki', 'https://www.youtube.com/embed/CK0USRKOO6A', TO_TIMESTAMP('2020-04-03 02:11:47', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'No tak byÅ‚o', 'https://www.youtube.com/embed/-TbnaoaJFgQ', TO_TIMESTAMP('2020-04-12 18:02:24', 'YYYY-MM-DD hh24_mi_ss'), '', 2),
+(uuid_generate_v4(), 'NOTHINGE #1', 'https://www.youtube.com/embed/dPec9XscGEE', TO_TIMESTAMP('2020-04-12 21:48:17', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'SEBA KALAMBURY #1', 'https://www.youtube.com/embed/wjg3uRLGXUs', TO_TIMESTAMP('2020-04-13 02:24:09', 'YYYY-MM-DD hh24_mi_ss'), '', 6),
+(uuid_generate_v4(), 'NOTHINGE #2', 'https://www.youtube.com/embed/JTIbb8r3h-8', TO_TIMESTAMP('2020-04-13 17:21:48', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Jestem dumny Kuba', 'https://www.youtube.com/embed/bh_lSOWkfCU', TO_TIMESTAMP('2020-04-17 12:51:22', 'YYYY-MM-DD hh24_mi_ss'), '', 1),
+(uuid_generate_v4(), 'Scout wallbang + 3hs deagle', 'https://www.youtube.com/embed/SHEdlHIgpx8', TO_TIMESTAMP('2020-04-25 22:33:54', 'YYYY-MM-DD hh24_mi_ss'), 'SiadÅ‚o :D', 1),
+(uuid_generate_v4(), '', 'https://www.youtube.com/embed/7B5jDlaRMkc', TO_TIMESTAMP('2020-05-01 20:51:49', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'esportowy sen', 'https://www.youtube.com/embed/sF_y5_pqCpE', TO_TIMESTAMP('2020-05-02 13:01:31', 'YYYY-MM-DD hh24_mi_ss'), '', 2),
+(uuid_generate_v4(), '', 'https://www.youtube.com/embed/tnzJmibsIEE', TO_TIMESTAMP('2020-05-14 23:35:22', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Kalambury: Kromka', 'https://www.youtube.com/embed/8AsKOdwbE9c', TO_TIMESTAMP('2020-05-15 08:42:44', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Kalambury: Wierzowiec', 'https://www.youtube.com/embed/aiMmxOExQFM', TO_TIMESTAMP('2020-05-15 08:43:09', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Nagroda Jackoba Maj 2020: Wojtek', 'https://www.youtube.com/embed/FckVW4f8pTE', TO_TIMESTAMP('2020-05-15 08:43:42', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Koniec pewnej epoki.. xD', 'https://www.youtube.com/embed/mf9i2eMAnY4', TO_TIMESTAMP('2020-05-28 23:17:58', 'YYYY-MM-DD hh24_mi_ss'), '', 2),
+(uuid_generate_v4(), 'Swietowanie Supreme', 'https://www.youtube.com/embed/Tv3UBmcNUSU', TO_TIMESTAMP('2020-05-30 17:01:15', 'YYYY-MM-DD hh24_mi_ss'), '', 1),
+(uuid_generate_v4(), 'Flypy + Niemmir true global', 'https://www.youtube.com/embed/mHDaJldsib8', TO_TIMESTAMP('2020-06-15 01:45:17', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), '', 'https://www.youtube.com/embed/v_zQ0eldwwA', TO_TIMESTAMP('2020-06-17 09:33:27', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), '', 'https://www.youtube.com/embed/j6BjRcEw-Q4', TO_TIMESTAMP('2020-06-22 01:59:28', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), '', 'https://www.youtube.com/embed/Ywh-h1lYDWw', TO_TIMESTAMP('2020-07-13 22:53:26', 'YYYY-MM-DD hh24_mi_ss'), '', 1),
+(uuid_generate_v4(), 'Smieszki #2', 'https://www.youtube.com/embed/ff_gE0EXWyM', TO_TIMESTAMP('2020-08-11 19:22:33', 'YYYY-MM-DD hh24_mi_ss'), '', 1),
+(uuid_generate_v4(), 'Åšmieszki #3', 'https://www.youtube.com/embed/iAy78OORg_4', TO_TIMESTAMP('2020-09-05 17:37:10', 'YYYY-MM-DD hh24_mi_ss'), '', 1),
+(uuid_generate_v4(), 'PRZERAÅ»AJACE Seba terroryzuje niemieckie dzieci [18+]', 'https://www.youtube.com/embed/yD0Pnealx-U', TO_TIMESTAMP('2021-02-08 12:00:40', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Åšmieszki #4', 'https://www.youtube.com/embed/OBBW52f7BGs', TO_TIMESTAMP('2021-02-08 12:01:01', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Åšmieszki #5', 'https://www.youtube.com/embed/Z43SDSsjvrA', TO_TIMESTAMP('2021-02-08 12:01:30', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Kalambury - pempek', 'https://www.youtube.com/embed/tWXUwjjjdO4', TO_TIMESTAMP('2021-02-08 12:01:53', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Åšmieszki #6', 'https://www.youtube.com/embed/vH1RTPFrU7o', TO_TIMESTAMP('2021-02-08 12:02:12', 'YYYY-MM-DD hh24_mi_ss'), '', 0),
+(uuid_generate_v4(), 'Åšmieszki #7', 'https://www.youtube.com/embed/k8d1Whx9uzk', TO_TIMESTAMP('2021-02-08 12:02:24', 'YYYY-MM-DD hh24_mi_ss'), '', 0);
