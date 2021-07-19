@@ -42,4 +42,11 @@ public class JugoController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/{jugoId}/like-add")
+    public ResponseEntity<Void> giveOneLike(@PathVariable("jugoId") UUID id) {
+        log.info("give one like to jugoId : " + id);
+        service.giveOneLike(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

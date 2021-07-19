@@ -36,4 +36,10 @@ public class JugoService {
         var jugo = new Jugo(jugoDto.getTitle(), jugoDto.getVideoURL(), jugoDto.getVideoComment(), jugoDto.getVideoLikes());
         jugoRepository.save(jugo);
     }
+
+    @Transactional
+    public void giveOneLike(UUID id) {
+        var jugo = jugoRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Jugo not found!"));
+        jugo.setVideoLikes(jugo.getVideoLikes() + 1);
+    }
 }
