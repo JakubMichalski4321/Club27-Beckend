@@ -16,6 +16,7 @@
 	<description>Klub 27 Service</description>
 	<properties>
 		<java.version>11</java.version>
+		<mapstruct.version>1.4.1.Final</mapstruct.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,7 +65,17 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

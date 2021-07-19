@@ -1,5 +1,6 @@
 package com.club27.web.controllers;
 
+import com.club27.domain.Pajacyzm;
 import com.club27.services.PajacyzmyService;
 import com.club27.web.dto.PajacyzmDto;
 import lombok.*;
@@ -15,33 +16,30 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/pajacyzmy")
-@Data
 @Slf4j
+@RequiredArgsConstructor
 
 public class PajacyzmyController {
 
-    private PajacyzmyService service;
-
-    public PajacyzmyController(PajacyzmyService pajacyzmyService){
-        this.service = pajacyzmyService;
-    }
+    private final PajacyzmyService service;
 
     @GetMapping("/{pajacyzmId}")
-    public ResponseEntity<PajacyzmDto> getPajacyzm(@PathVariable("pajacyzmId") UUID id){
+    public ResponseEntity<Pajacyzm> getPajacyzm(@PathVariable("pajacyzmId") UUID id){
+        log.info("Getting pajacyzm called");
         var pajacyzm = service.getPajacyzm(id);
         return new ResponseEntity<>(pajacyzm, HttpStatus.OK);
     }
 
     @GetMapping("/pajacyzmy-all")
     public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(){
-        log.debug("getting all pajacyzmy");
+        log.info("Getting all pajacyzmy");
         var pajacyzmy = service.getAllPajacyzmy();
         return new ResponseEntity<>(pajacyzmy, HttpStatus.OK);
     }
 
     @PostMapping("/pajacyzm-submit")
     public ResponseEntity<Void> submitPajacyzm(@Valid @RequestBody PajacyzmDto pajacyzm){
-        log.debug("submit pajacyzm called, " + pajacyzm.toString());
+        log.info("Submit pajacyzm called, " + pajacyzm.toString());
         service.submitPajacyzm(pajacyzm);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

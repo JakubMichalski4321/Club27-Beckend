@@ -1,9 +1,12 @@
 package com.club27.web.controllers;
 
-import com.club27.domain.Comment;
+import com.club27.domain.Mem;
 import com.club27.services.MemyService;
-import com.club27.web.dto.*;
-import lombok.*;
+import com.club27.web.dto.CommentDto;
+import com.club27.web.dto.CommentToUploadDto;
+import com.club27.web.dto.MemDto;
+import com.club27.web.dto.MemToUploadDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +21,15 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/meme")
-@Data
 @Slf4j
+@RequiredArgsConstructor
 
 public class MemyController {
 
-    private MemyService service;
-
-    public MemyController(MemyService memyService){
-        this.service = memyService;
-    }
+    private final MemyService service;
 
     @GetMapping("/{memId}")
-    public ResponseEntity<MemDto> getMem(@PathVariable("memId") UUID id){
+    public ResponseEntity<Mem> getMem(@PathVariable("memId") UUID id){
         var mem = service.getMem(id);
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
@@ -43,7 +42,7 @@ public class MemyController {
     }
 
     @GetMapping("/{memeId}/like-add")
-    public ResponseEntity<Void> giveOneLike(@PathVariable("memeId") UUID id) throws Exception {
+    public ResponseEntity<Void> giveOneLike(@PathVariable("memeId") UUID id) {
         log.info("give one like to meme : " + id);
         service.giveOneLike(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -57,7 +56,7 @@ public class MemyController {
     }
 
     @PostMapping("/meme-image-submit")
-    public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file", required = true) MultipartFile file){
+    public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file") MultipartFile file){
         log.debug("submit file saved called, " + file.toString());
         try {
             service.submitFile(file);
@@ -69,14 +68,14 @@ public class MemyController {
     }
 
     @GetMapping("/{memeId}/comments-all")
-    public ResponseEntity<List<CommentDto>> getMemeAllComments(@PathVariable("memeId") UUID id) throws Exception {
+    public ResponseEntity<List<CommentDto>> getMemeAllComments(@PathVariable("memeId") UUID id) {
         log.debug("getting all comments for meme: " + id);
         var commentsList = service.getThisMemComments(id);
         return new ResponseEntity<>(commentsList, HttpStatus.OK);
     }
 
     @PostMapping("/meme-comment-submit")
-    public ResponseEntity<Void> submitMemeComment(@Valid @RequestBody CommentToUploadDto comment) throws Exception {
+    public ResponseEntity<Void> submitMemeComment(@Valid @RequestBody CommentToUploadDto comment) {
         log.debug("submit comment called, " + comment.toString());
         service.submitMemComment(comment);
         return new ResponseEntity<>(HttpStatus.CREATED);

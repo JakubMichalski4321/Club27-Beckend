@@ -1,8 +1,9 @@
 package com.club27.web.controllers;
 
+import com.club27.domain.Jugo;
 import com.club27.services.JugoService;
 import com.club27.web.dto.JugoDto;
-import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +15,15 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/jugo")
-@Data
 @Slf4j
+@RequiredArgsConstructor
 
 public class JugoController {
 
-    private JugoService service;
-
-    public JugoController(JugoService jugoService){
-        this.service = jugoService;
-    }
+    private final JugoService service;
 
     @GetMapping("/{jugoId}")
-    public ResponseEntity<JugoDto> getJugo(@PathVariable("jugoId") UUID id){
+    public ResponseEntity<Jugo> getJugo(@PathVariable("jugoId") UUID id){
         var jugo = service.getJugo(id);
         return new ResponseEntity<>(jugo, HttpStatus.OK);
     }

@@ -2,6 +2,7 @@ package com.club27.services;
 
 import com.club27.domain.Mem;
 import com.club27.domain.Comment;
+import com.club27.exception.ObjectNotFoundException;
 import com.club27.repositories.CommentRepository;
 import com.club27.repositories.MemyRepository;
 import com.club27.web.dto.CommentDto;
@@ -9,6 +10,8 @@ import com.club27.web.dto.CommentToUploadDto;
 import com.club27.web.dto.MemDto;
 import com.club27.web.dto.MemToUploadDto;
 import com.club27.web.mappers.MemMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,25 +21,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class MemyService {
+
     private final MemyRepository memyRepository;
     private final CommentRepository commentRepository;
     private final MemMapper mapper;
 
-    public MemyService(MemyRepository memyRepository, CommentRepository commentRepository, MemMapper mapper) {
-        this.memyRepository = memyRepository;
-        this.commentRepository = commentRepository;
-        this.mapper = mapper;
-    }
-
     @Transactional
-    public MemDto getMem(UUID id) {
-        var mem = memyRepository.findById(id);
-        return mapper.memOptionalToDto(mem);
+    public Mem getMem(UUID id) {
+        return memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
     }
 
     public List<MemDto> getAllMemy() {
@@ -45,12 +43,9 @@ public class MemyService {
     }
 
     @Transactional
-    public void giveOneLike(UUID id) throws Exception {
-        var mem = memyRepository.findById(id);
-        if(mem.isEmpty()){
-            throw new Exception("Cannot find the record");
-        }
-        mem.get().setMemeLikes(mem.get().getMemeLikes() + 1);
+    public void giveOneLike(UUID id) {
+        var mem = memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        mem.setMemeLikes(mem.getMemeLikes() + 1);
     }
 
     @Transactional
@@ -67,23 +62,17 @@ public class MemyService {
         Files.write(path, fileInBytes);
     }
 
-    public List<CommentDto> getThisMemComments(UUID id) throws Exception {
-        var selectedMeme = memyRepository.findById(id);
-        if(selectedMeme.isEmpty()){
-            throw new Exception("Cannot find the record");
-        }
-        return mapper.mapAllMemeComments(selectedMeme.get().getMemeComments());
+    public List<CommentDto> getThisMemComments(UUID id) {
+        var selectedMeme = memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        return mapper.mapAllMemeComments(selectedMeme.getMemeComments());
     }
 
     @Transactional
-    public void submitMemComment(CommentToUploadDto comment) throws Exception {
-        Optional<Mem> selectedMeme = memyRepository.findById(comment.getMemeId());
-        if(selectedMeme.isEmpty()){
-            throw new Exception("Cannot find the record");
-        }
-        var commentToSave = new Comment(comment.getContent(), comment.getAuthor(), selectedMeme.get());
-        commentToSave.setMem(selectedMeme.get());
-        selectedMeme.get().getMemeComments().add(commentToSave);
+    public void submitMemComment(CommentToUploadDto comment) {
+        var selectedMeme = memyRepository.findById(comment.getMemeId()).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        var commentToSave = new Comment(comment.getContent(), comment.getAuthor(), selectedMeme);
+        commentToSave.setMem(selectedMeme);
+        selectedMeme.getMemeComments().add(commentToSave);
         commentRepository.save(commentToSave);
     }
 

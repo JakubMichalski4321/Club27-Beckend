@@ -1,18 +1,15 @@
 package com.club27.web.controllers;
 
+import com.club27.domain.Soundboard;
 import com.club27.services.SoundboardService;
 import com.club27.web.dto.SoundboardDto;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Context;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -21,19 +18,15 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/soundboard")
-@Data
 @Slf4j
+@RequiredArgsConstructor
 
 public class SoundboardController {
 
-    private SoundboardService service;
-
-    public SoundboardController(SoundboardService soundboardService){
-        this.service = soundboardService;
-    }
+    private final SoundboardService service;
 
     @GetMapping("/{soundboardId}")
-    public ResponseEntity<SoundboardDto> getSoundboard(@PathVariable("soundboardId") UUID id){
+    public ResponseEntity<Soundboard> getSoundboard(@PathVariable("soundboardId") UUID id){
         var soundboard = service.getSoundboard(id);
         return new ResponseEntity<>(soundboard, HttpStatus.OK);
     }
