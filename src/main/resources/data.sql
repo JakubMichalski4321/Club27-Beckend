@@ -57,7 +57,12 @@ INSERT INTO public.pajacyzm(id, content, author, created_date) VALUES
 (uuid_generate_v4(), 'Zapomniałem o was, bo tu bawię się i śmieje w najlepsze', 'Pajac', TO_TIMESTAMP('2021-04-24', 'YYYY-MM-DD')),
 (uuid_generate_v4(), 'Chciałbym porozmawiać o tym, że co myślą na temat tego, że nasz świat stworzyli kosmici, a jednym z Nich jest Bóg.', 'Pajac', TO_TIMESTAMP('2021-05-20', 'YYYY-MM-DD')),
 (uuid_generate_v4(), 'Ognisko w ścianie, znaczy kominek', 'Imprezowicz Pati', TO_TIMESTAMP('2021-05-26', 'YYYY-MM-DD')),
-(uuid_generate_v4(), 'To nie ja, to opaska', 'Fit Patryk', TO_TIMESTAMP('2021-06-10', 'YYYY-MM-DD')), (uuid_generate_v4(), 'Ciężko pracuje w łóżku', 'Ten co robi ważne rzeczy', TO_TIMESTAMP('2021-06-22', 'YYYY-MM-DD'));
+(uuid_generate_v4(), 'To nie ja, to opaska', 'Fit Patryk', TO_TIMESTAMP('2021-06-10', 'YYYY-MM-DD')),
+(uuid_generate_v4(), 'Ciężko pracuje w łóżku', 'Ten co robi ważne rzeczy', TO_TIMESTAMP('2021-06-22', 'YYYY-MM-DD')),
+('2ac694ce-fa6f-4b1e-bc93-48e1a5597d9c', 'Zabijaj se komary ale nie chrabąszcze', 'Patryk', TO_TIMESTAMP('2021-07-18', 'YYYY-MM-DD')),
+('c6e9f110-e3bb-49db-8463-d6e29a2f28ae', 'Musisz się zawzięć', '...', TO_TIMESTAMP('2021-07-18', 'YYYY-MM-DD')),
+('06686fa1-e1cf-4fe1-ac28-0f09d09fb41e', 'Pajajo', 'Krzychu', TO_TIMESTAMP('2021-07-18', 'YYYY-MM-DD')),
+('d2d7394c-a1ef-4d9f-891e-a14eb0586406', 'Ej a kto jest tym drugim w top3?', 'Jakub Michalski', TO_TIMESTAMP('2021-07-18', 'YYYY-MM-DD'));
 
 INSERT INTO public.mem(id, title, author, created_date, image_path, meme_likes) VALUES
 (uuid_generate_v4(), 'Pierwszy mem', 'no ja a kto', TO_TIMESTAMP('2020-02-04', 'YYYY-MM-DD'), 'dudaaa.jpg', 2),
