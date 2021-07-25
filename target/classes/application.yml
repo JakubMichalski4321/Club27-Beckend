@@ -7,13 +7,13 @@ spring:
 #   username: club27user
 #   password: club27pass
     driver-class-name: org.postgresql.Driver
-    initialization-mode: always
+    initialization-mode: never
 
 
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
   sql:
     init:
       enabled:
