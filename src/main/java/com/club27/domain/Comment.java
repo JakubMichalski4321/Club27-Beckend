@@ -31,6 +31,7 @@ public class Comment extends BaseEntity{
     }
 
     @ManyToOne
+    @JoinColumn(name = "mem_id", nullable = false)
     private Mem mem;
 
 }
