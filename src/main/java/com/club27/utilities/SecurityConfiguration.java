@@ -23,6 +23,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtRequestFilter jwtRequestFilter;
+    private final String[] allowedWithoutLogin = {
+            "/user/login",
+            "/pajacyzmy/*",
+            "/memy/*",
+            "/soundboard/*",
+            "/jugo/*"
+    };
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
@@ -31,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity webSecurity){
-        webSecurity.ignoring().antMatchers("/user/login");
+        webSecurity.ignoring().antMatchers(allowedWithoutLogin);
     }
 
     @Override
@@ -43,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/user/login").permitAll()
+                .antMatchers(allowedWithoutLogin).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
