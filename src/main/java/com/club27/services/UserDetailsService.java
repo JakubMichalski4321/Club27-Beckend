@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    private PasswordEncoder passwordEncoder;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
 
@@ -27,8 +26,8 @@ public class UserDetailsService implements org.springframework.security.core.use
             throw new UsernameNotFoundException("Cannot find user with these credentials");
         }
         UserAccount user = users.get(0);
-
+        System.out.println(user.getPass());
         return new org.springframework.security.core.userdetails.User
-                (user.getName(), bCryptPasswordEncoder.encode(user.getPass()), new ArrayList<>());
+                (user.getName(), user.getPass(), new ArrayList<>());
     }
 }

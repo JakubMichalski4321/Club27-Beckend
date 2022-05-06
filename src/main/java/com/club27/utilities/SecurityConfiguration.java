@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final JwtRequestFilter jwtRequestFilter;
     private final String[] allowedWithoutLogin = {
             "/user/login",
+            "/user/register-user",
             "/pajacyzmy/*",
             "/memy/*",
             "/soundboard/*",

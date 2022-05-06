@@ -5,7 +5,7 @@ import com.club27.exception.UserExistsException;
 import com.club27.repositories.UserRepository;
 import com.club27.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserAccount registerNewUser(UserDto userDto) throws UserExistsException {
-        if(userNameExists(userDto.name())){
-            throw new UserExistsException("Istnieje już użytkownik o nazwie " + userDto.name());
+        if(userNameExists(userDto.username())){
+            throw new UserExistsException("Istnieje już użytkownik o nazwie " + userDto.username());
         }
 
         UserAccount userAccount = new UserAccount();
-        userAccount.setName(userDto.name());
-        userAccount.setPass(passwordEncoder.encode(userDto.pass()));
+        userAccount.setName(userDto.username());
+        userAccount.setPass(bCryptPasswordEncoder.encode(userDto.password()));
 
         return userRepository.save(userAccount);
     }

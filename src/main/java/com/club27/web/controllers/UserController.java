@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping("/register-user")
     public ResponseEntity<Void> registerUser(@Valid @RequestBody UserDto userDto){
         userService.registerNewUser(userDto);
-        log.debug("register new user " + userDto.name());
+        log.debug("register new user " + userDto.username());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
