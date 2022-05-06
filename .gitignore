@@ -26,3 +26,6 @@ src/main/resources/application.yml
 target/
 out/artifacts/
 target/classes/application.yml
+src/main/resources/application.properties
+target/classes/application.properties
+target/classes/application.yml
