@@ -30,10 +30,12 @@ public class PajacyzmyController {
         return new ResponseEntity<>(pajacyzm, HttpStatus.OK);
     }
 
-    @GetMapping("/pajacyzmy-all")
-    public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(){
-        log.info("Getting all pajacyzmy");
-        var pajacyzmy = service.getAllPajacyzmy();
+    @GetMapping("/pajacyzmy")
+    public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage){
+        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
+        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
+        log.info("Getting pajacyzmy");
+        var pajacyzmy = service.getPajacyzmy(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(pajacyzmy, HttpStatus.OK);
     }
 

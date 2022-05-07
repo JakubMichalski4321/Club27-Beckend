@@ -28,10 +28,12 @@ public class JugoController {
         return new ResponseEntity<>(jugo, HttpStatus.OK);
     }
 
-    @GetMapping("/jugo-all")
-    public ResponseEntity<List<JugoDto>> getAllSoundboard(){
+    @GetMapping("/jugos")
+    public ResponseEntity<List<JugoDto>> getAllSoundboard(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage){
+        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
+        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
         log.debug("getting all Jugo");
-        var jugos = service.getAllJugo();
+        var jugos = service.getJugos(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(jugos, HttpStatus.OK);
     }
 

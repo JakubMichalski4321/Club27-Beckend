@@ -12,6 +12,7 @@ import com.club27.web.dto.MemToUploadDto;
 import com.club27.web.mappers.MemMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,9 +38,9 @@ public class MemyService {
         return memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
     }
 
-    public List<MemDto> getAllMemy() {
-        var  memyAll = memyRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
-        return mapper.mapAll(memyAll);
+    public List<MemDto> getMemy(int pageNumber, int numberPerPage) {
+        var memy = memyRepository.findAllMemy(PageRequest.of(pageNumber, numberPerPage, Sort.by(Sort.Direction.DESC, "createdDate")));
+        return mapper.mapAll(memy);
     }
 
     @Transactional

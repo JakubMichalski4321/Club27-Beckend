@@ -34,10 +34,12 @@ public class MemyController {
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
 
-    @GetMapping("/meme-all")
-    public ResponseEntity<List<MemDto>> getAllMemy(){
-        log.info("getting all memy");
-        var memy = service.getAllMemy();
+    @GetMapping("/memy")
+    public ResponseEntity<List<MemDto>> getAllMemy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage){
+        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
+        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
+        log.info("getting memy");
+        var memy = service.getMemy(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }
 

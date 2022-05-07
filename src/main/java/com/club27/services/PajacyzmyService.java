@@ -7,6 +7,7 @@ import com.club27.web.dto.PajacyzmDto;
 import com.club27.web.mappers.PajacyzmMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,9 @@ public class PajacyzmyService {
         return pajacyzm;
     }
 
-    public List<PajacyzmDto> getAllPajacyzmy() {
-        var pajacyzmyAll = pajacyzmyRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
-        return pajacyzmMapper.mapAll(pajacyzmyAll);
+    public List<PajacyzmDto> getPajacyzmy(int pageNumberInt, int numberInt) {
+        var pajacyzmy = pajacyzmyRepository.findAllPajacyzmy(PageRequest.of(pageNumberInt, numberInt, Sort.by(Sort.Direction.DESC, "createdDate")));
+        return pajacyzmMapper.mapAll(pajacyzmy);
     }
 
     @Transactional

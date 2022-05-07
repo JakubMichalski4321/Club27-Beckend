@@ -7,6 +7,7 @@ import com.club27.web.dto.JugoDto;
 import com.club27.web.mappers.JugoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -26,8 +27,8 @@ public class JugoService {
         return jugoRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Jugo not found"));
     }
 
-    public List<JugoDto> getAllJugo() {
-        var jugos = jugoRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
+    public List<JugoDto> getJugos(int pageNumberInt, int numberPerPageInt) {
+        var jugos = jugoRepository.findAllJugo(PageRequest.of(pageNumberInt, numberPerPageInt, Sort.by(Sort.Direction.DESC, "createdDate")));
         return jugoMapper.jugoListToDto(jugos);
     }
 
