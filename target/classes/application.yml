@@ -1,28 +1,16 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5000/club27local
-    username: testUser
+    url: jdbc:postgresql://localhost:5000/club27db
+    username: club27user
     password: 1234
-    #url: jdbc:postgresql://145.239.92.211:1234/club27
-    #username: club27user
-    #password: club27pass
     driver-class-name: org.postgresql.Driver
     initialization-mode: always
-
 
   jpa:
     generate-ddl: true
     hibernate:
-    ddl-auto: none
-    database: postgresql
-  sql:
-    init:
-      enabled:
+      ddl-auto: create
 
 users:
   listing:
     pageSize: 12
-server:
-  error:
-    include-message: always
-  port: 8090
