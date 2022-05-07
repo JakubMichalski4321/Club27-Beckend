@@ -37,7 +37,7 @@ public class SoundboardService {
 
     @Transactional
     public void submitSoundboard(SoundboardDto soundboardDto) {
-        var soundboard = new Soundboard(soundboardDto.getId(), soundboardDto.getTitle(), soundboardDto.getWhoIs(), soundboardDto.getPathToFile());
+        var soundboard = new Soundboard(soundboardDto.id(), soundboardDto.title(), soundboardDto.whoIs(), soundboardDto.pathToFile());
         soundboardRepository.save(soundboard);
     }
 

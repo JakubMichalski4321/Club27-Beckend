@@ -50,7 +50,7 @@ public class MemyService {
 
     @Transactional
     public void submitMemWithUrl(MemToUploadDto memToUploadDto) {
-        var mem = new Mem(memToUploadDto.getTitle(), memToUploadDto.getAuthor(), memToUploadDto.getImagePath(), 0);
+        var mem = new Mem(memToUploadDto.title(), memToUploadDto.author(), memToUploadDto.imagePath(), 0);
         memyRepository.save(mem);
     }
 
@@ -69,8 +69,8 @@ public class MemyService {
 
     @Transactional
     public void submitMemComment(CommentToUploadDto comment) {
-        var selectedMeme = memyRepository.findById(comment.getMemeId()).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
-        var commentToSave = new Comment(comment.getContent(), comment.getAuthor(), selectedMeme);
+        var selectedMeme = memyRepository.findById(comment.memeId()).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        var commentToSave = new Comment(comment.content(), comment.author(), selectedMeme);
         commentToSave.setMem(selectedMeme);
         selectedMeme.getMemeComments().add(commentToSave);
         commentRepository.save(commentToSave);

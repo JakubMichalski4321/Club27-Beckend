@@ -33,7 +33,7 @@ public class JugoService {
 
     @Transactional
     public void submitJugo(JugoDto jugoDto) {
-        var jugo = new Jugo(jugoDto.getTitle(), jugoDto.getVideoURL(), jugoDto.getVideoComment(), jugoDto.getVideoLikes());
+        var jugo = new Jugo(jugoDto.title(), jugoDto.videoURL(), jugoDto.videoComment(), jugoDto.videoLikes());
         jugoRepository.save(jugo);
     }
 

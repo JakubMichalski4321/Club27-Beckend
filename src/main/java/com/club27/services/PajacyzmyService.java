@@ -37,7 +37,7 @@ public class PajacyzmyService {
 
     @Transactional
     public void submitPajacyzm(PajacyzmDto pajacyzmDto) {
-        var pajacyzm = new Pajacyzm(pajacyzmDto.getContent(), pajacyzmDto.getAuthor());
+        var pajacyzm = new Pajacyzm(pajacyzmDto.content(), pajacyzmDto.author());
         pajacyzmyRepository.save(pajacyzm);
     }
 
