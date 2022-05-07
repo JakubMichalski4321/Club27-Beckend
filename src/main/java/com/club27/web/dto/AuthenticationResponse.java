@@ -1,7 +1,9 @@
 package com.club27.web.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public record AuthenticationResponse(String jwt) { }
+public record AuthenticationResponse(String jwt) {
+}

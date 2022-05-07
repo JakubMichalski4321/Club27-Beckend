@@ -29,13 +29,13 @@ public class MemyController {
     private final MemyService service;
 
     @GetMapping("/{memId}")
-    public ResponseEntity<Mem> getMem(@PathVariable("memId") UUID id){
+    public ResponseEntity<Mem> getMem(@PathVariable("memId") UUID id) {
         var mem = service.getMem(id);
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
 
     @GetMapping("/memy")
-    public ResponseEntity<List<MemDto>> getAllMemy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage){
+    public ResponseEntity<List<MemDto>> getAllMemy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage) {
         int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
         int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
         log.info("getting memy");
@@ -51,14 +51,14 @@ public class MemyController {
     }
 
     @PostMapping("/meme-submit")
-    public ResponseEntity<Void> submitMemWithUrl(@Valid @RequestBody MemToUploadDto mem){
+    public ResponseEntity<Void> submitMemWithUrl(@Valid @RequestBody MemToUploadDto mem) {
         log.debug("submit mem called, " + mem.toString());
         service.submitMemWithUrl(mem);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/meme-image-submit")
-    public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file") MultipartFile file){
+    public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file") MultipartFile file) {
         log.debug("submit file saved called, " + file.toString());
         try {
             service.submitFile(file);

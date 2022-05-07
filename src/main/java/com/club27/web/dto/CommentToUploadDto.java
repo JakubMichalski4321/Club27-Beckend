@@ -6,4 +6,5 @@ public record CommentToUploadDto(
         String content,
         String author,
         UUID memeId
-) { }
+) {
+}

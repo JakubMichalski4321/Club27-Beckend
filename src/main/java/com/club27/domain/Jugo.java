@@ -2,6 +2,7 @@ package com.club27.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -12,7 +13,12 @@ import java.util.UUID;
 @Entity(name = "jugo")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor(force = true)
-public class Jugo extends BaseEntity{
+public class Jugo extends BaseEntity {
+
+    private String title;
+    private String videoURL;
+    private String videoComment;
+    private int videoLikes;
 
     public Jugo(String title, String videoURL, String videoComment, int videoLikes) {
         super();
@@ -29,10 +35,5 @@ public class Jugo extends BaseEntity{
         this.videoComment = videoComment;
         this.videoLikes = videoLikes;
     }
-
-    private String title;
-    private String videoURL;
-    private String videoComment;
-    private int videoLikes;
 
 }

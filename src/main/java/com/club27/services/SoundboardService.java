@@ -26,7 +26,7 @@ public class SoundboardService {
 
     @Transactional
     public Soundboard getSoundboard(UUID id) {
-        return soundboardRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Soundboard not found"));
+        return soundboardRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Soundboard not found"));
 
     }
 

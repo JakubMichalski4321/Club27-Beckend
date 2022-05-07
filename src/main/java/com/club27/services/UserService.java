@@ -17,7 +17,7 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserAccount registerNewUser(UserDto userDto) throws UserExistsException {
-        if(userNameExists(userDto.username())){
+        if (userNameExists(userDto.username())) {
             throw new UserExistsException("Istnieje już użytkownik o nazwie " + userDto.username());
         }
 
@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.save(userAccount);
     }
 
-    public Boolean userNameExists(String name){
+    public Boolean userNameExists(String name) {
         return !userRepository.findByName(name).isEmpty();
     }
 

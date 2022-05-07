@@ -10,6 +10,7 @@ import java.util.List;
 public interface PajacyzmMapper {
 
     PajacyzmDto pajacyzmToDto(Pajacyzm pajacyzm);
+
     List<PajacyzmDto> mapAll(List<Pajacyzm> list);
 
 }

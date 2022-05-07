@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class JugoService {
 
     @Transactional
     public Jugo getJugo(UUID id) {
-        return jugoRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Jugo not found"));
+        return jugoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Jugo not found"));
     }
 
     public List<JugoDto> getJugos(int pageNumberInt, int numberPerPageInt) {
@@ -40,7 +41,7 @@ public class JugoService {
 
     @Transactional
     public void giveOneLike(UUID id) {
-        var jugo = jugoRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Jugo not found!"));
+        var jugo = jugoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Jugo not found!"));
         jugo.setVideoLikes(jugo.getVideoLikes() + 1);
     }
 }

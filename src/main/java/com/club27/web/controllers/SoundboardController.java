@@ -3,7 +3,7 @@ package com.club27.web.controllers;
 import com.club27.domain.Soundboard;
 import com.club27.services.SoundboardService;
 import com.club27.web.dto.SoundboardDto;
-import lombok.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,20 +26,20 @@ public class SoundboardController {
     private final SoundboardService service;
 
     @GetMapping("/{soundboardId}")
-    public ResponseEntity<Soundboard> getSoundboard(@PathVariable("soundboardId") UUID id){
+    public ResponseEntity<Soundboard> getSoundboard(@PathVariable("soundboardId") UUID id) {
         var soundboard = service.getSoundboard(id);
         return new ResponseEntity<>(soundboard, HttpStatus.OK);
     }
 
     @GetMapping("/all-soundboard")
-    public ResponseEntity<List<SoundboardDto>> getAllSoundboard(){
+    public ResponseEntity<List<SoundboardDto>> getAllSoundboard() {
         log.debug("getting all soundboards");
         var soundboards = service.getAllSoundboards();
         return new ResponseEntity<>(soundboards, HttpStatus.OK);
     }
 
     @PostMapping("/soundboard-submit")
-    public ResponseEntity<Void> submitSoundboard(@Valid @RequestBody SoundboardDto soundboardDto){
+    public ResponseEntity<Void> submitSoundboard(@Valid @RequestBody SoundboardDto soundboardDto) {
         log.debug("submit soundboard called, " + soundboardDto.toString());
         service.submitSoundboard(soundboardDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class SoundboardController {
 
     @RequestMapping(value = "/soundboard-sound-submit", method = RequestMethod.POST, headers = {"Content-Type=multipart/form-data"})
     @ResponseBody
-    public  ResponseEntity<Void> create(@RequestBody MultipartFile file) {
+    public ResponseEntity<Void> create(@RequestBody MultipartFile file) {
         try {
             service.submitSoundboardSound(file);
         } catch (IOException e) {

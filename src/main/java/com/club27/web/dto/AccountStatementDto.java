@@ -9,4 +9,5 @@ public record AccountStatementDto(
         String title,
         String desc,
         UUID deptId
-) { }
+) {
+}

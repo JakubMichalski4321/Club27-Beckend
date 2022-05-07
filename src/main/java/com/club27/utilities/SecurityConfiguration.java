@@ -1,7 +1,6 @@
 package com.club27.utilities;
 
 import com.club27.services.UserDetailsService;
-import com.club27.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,12 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     };
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
-    public void configure(WebSecurity webSecurity){
+    public void configure(WebSecurity webSecurity) {
         webSecurity.ignoring().antMatchers(allowedWithoutLogin);
     }
 

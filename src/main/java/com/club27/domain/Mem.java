@@ -3,6 +3,7 @@ package com.club27.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -35,7 +36,7 @@ public class Mem extends BaseEntity {
         this.memeComments = new ArrayList<>();
     }
 
-    public Mem(String title, String author, String imagePath, int memeLikes){
+    public Mem(String title, String author, String imagePath, int memeLikes) {
         super();
         this.title = title;
         this.author = author;

@@ -9,4 +9,5 @@ public record SoundboardDto(
         String whoIs,
         String pathToFile,
         Timestamp createdDate
-) { }
+) {
+}

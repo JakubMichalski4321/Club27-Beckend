@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor(force = true)
 @Entity(name = "account_statement")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class AccountStatement extends BaseEntity{
+public class AccountStatement extends BaseEntity {
 
     private Double amount;
     private String title;

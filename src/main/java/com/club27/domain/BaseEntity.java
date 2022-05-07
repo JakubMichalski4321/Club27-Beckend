@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BaseEntity {
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private final Timestamp createdDate;
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -31,12 +35,9 @@ public class BaseEntity {
         this.id = id;
         createdDate = Timestamp.valueOf(LocalDateTime.now());
     }
-    public BaseEntity(){
+
+    public BaseEntity() {
         createdDate = Timestamp.valueOf(LocalDateTime.now());
     }
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    private final Timestamp createdDate;
 
 }

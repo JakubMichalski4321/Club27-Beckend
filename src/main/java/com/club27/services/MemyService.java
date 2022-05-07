@@ -1,7 +1,7 @@
 package com.club27.services;
 
-import com.club27.domain.Mem;
 import com.club27.domain.Comment;
+import com.club27.domain.Mem;
 import com.club27.exception.ObjectNotFoundException;
 import com.club27.repositories.CommentRepository;
 import com.club27.repositories.MemyRepository;
@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,9 +34,8 @@ public class MemyService {
     private final CommentRepository commentRepository;
     private final MemMapper mapper;
 
-    @Transactional
     public Mem getMem(UUID id) {
-        return memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        return memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
     }
 
     public List<MemDto> getMemy(int pageNumber, int numberPerPage) {
@@ -45,7 +45,7 @@ public class MemyService {
 
     @Transactional
     public void giveOneLike(UUID id) {
-        var mem = memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        var mem = memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
         mem.setMemeLikes(mem.getMemeLikes() + 1);
     }
 
@@ -64,13 +64,13 @@ public class MemyService {
     }
 
     public List<CommentDto> getThisMemComments(UUID id) {
-        var selectedMeme = memyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        var selectedMeme = memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
         return mapper.mapAllMemeComments(selectedMeme.getMemeComments());
     }
 
     @Transactional
     public void submitMemComment(CommentToUploadDto comment) {
-        var selectedMeme = memyRepository.findById(comment.memeId()).orElseThrow( () -> new ObjectNotFoundException("Meme not found!"));
+        var selectedMeme = memyRepository.findById(comment.memeId()).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
         var commentToSave = new Comment(comment.content(), comment.author(), selectedMeme);
         commentToSave.setMem(selectedMeme);
         selectedMeme.getMemeComments().add(commentToSave);

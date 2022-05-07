@@ -3,7 +3,6 @@ package com.club27.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.mapstruct.control.MappingControl;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor(force = true)
 @Entity(name = "dept")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Dept extends BaseEntity{
+public class Dept extends BaseEntity {
 
     private Double balance;
 

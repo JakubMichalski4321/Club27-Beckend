@@ -12,10 +12,13 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor(force = true)
 
-public class Comment extends BaseEntity{
+public class Comment extends BaseEntity {
 
     private String content;
     private String author;
+    @ManyToOne
+    @JoinColumn(name = "mem_id", nullable = false)
+    private Mem mem;
 
     public Comment(String content, String author, Mem mem) {
         super();
@@ -29,9 +32,5 @@ public class Comment extends BaseEntity{
         this.content = content;
         this.author = author;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "mem_id", nullable = false)
-    private Mem mem;
 
 }

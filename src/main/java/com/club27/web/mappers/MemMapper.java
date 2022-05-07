@@ -12,8 +12,11 @@ import java.util.List;
 public interface MemMapper {
 
     MemDto memToDto(Mem mem);
+
     List<MemDto> mapAll(List<Mem> list);
+
     CommentDto commentToCommentDto(Comment comment);
+
     List<CommentDto> mapAllMemeComments(List<Comment> list);
 
 }

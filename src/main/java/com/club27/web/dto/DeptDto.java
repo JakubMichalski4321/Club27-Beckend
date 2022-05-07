@@ -9,4 +9,5 @@ public record DeptDto(
         Double balance,
         UUID user1,
         UUID user2
-) { }
+) {
+}

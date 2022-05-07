@@ -31,14 +31,14 @@ public class UserController {
     private final UserDetailsService userDetailsService;
 
     @PostMapping("/register-user")
-    public ResponseEntity<Void> registerUser(@Valid @RequestBody UserDto userDto){
+    public ResponseEntity<Void> registerUser(@Valid @RequestBody UserDto userDto) {
         userService.registerNewUser(userDto);
         log.debug("register new user " + userDto.username());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/user-exists/{userName}")
-    public ResponseEntity<Boolean> userExists(@PathVariable("userName") String name){
+    public ResponseEntity<Boolean> userExists(@PathVariable("userName") String name) {
         var userExists = userService.userNameExists(name);
         return new ResponseEntity<>(userExists, HttpStatus.OK);
     }
@@ -46,11 +46,11 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDto loginDto) throws Exception {
         log.info("Login attempt for user: " + loginDto.username());
-        try{
+        try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginDto.username(), loginDto.password())
             );
-        }catch (BadCredentialsException badCredentialsException){
+        } catch (BadCredentialsException badCredentialsException) {
             log.warn("Login attempt failed for user: " + loginDto.username());
             throw new Exception("Incorrect credentials", badCredentialsException);
         }

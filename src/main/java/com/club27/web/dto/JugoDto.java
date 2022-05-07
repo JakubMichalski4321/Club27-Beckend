@@ -10,4 +10,5 @@ public record JugoDto(
         String videoComment,
         int videoLikes,
         Timestamp createdDate
-) { }
+) {
+}

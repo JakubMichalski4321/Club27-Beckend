@@ -10,4 +10,5 @@ public record MemDto(
         String imagePath,
         int memeLikes,
         Timestamp createdDate
-){ }
+) {
+}

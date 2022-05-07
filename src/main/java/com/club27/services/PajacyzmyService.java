@@ -26,7 +26,7 @@ public class PajacyzmyService {
 
     @Transactional
     public Pajacyzm getPajacyzm(UUID id) {
-        var pajacyzm = pajacyzmyRepository.findById(id).orElseThrow( () -> new ObjectNotFoundException("Pajacyzm not found!"));
+        var pajacyzm = pajacyzmyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Pajacyzm not found!"));
         log.info(pajacyzm.toString());
         return pajacyzm;
     }

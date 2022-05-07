@@ -11,10 +11,7 @@ import java.util.UUID;
 @Entity(name = "user_account")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor(force = true)
-public class UserAccount extends BaseEntity{
-
-    private String name;
-    private String pass;
+public class UserAccount extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
@@ -22,6 +19,8 @@ public class UserAccount extends BaseEntity{
             joinColumns = @JoinColumn(name = "user_account_id"),
             inverseJoinColumns = @JoinColumn(name = "dept_id"))
     List<Dept> userDepts;
+    private String name;
+    private String pass;
 
     public UserAccount(UUID id, String name, String pass) {
         super(id);
@@ -29,7 +28,7 @@ public class UserAccount extends BaseEntity{
         this.pass = pass;
     }
 
-    public UserAccount(String name, String pass){
+    public UserAccount(String name, String pass) {
         super();
         this.name = name;
         this.pass = pass;
