@@ -1,11 +1,9 @@
 package com.club27.web.controllers;
 
 import com.club27.domain.Mem;
+import com.club27.services.ListService;
 import com.club27.services.MemyService;
-import com.club27.web.dto.CommentDto;
-import com.club27.web.dto.CommentToUploadDto;
-import com.club27.web.dto.MemDto;
-import com.club27.web.dto.MemToUploadDto;
+import com.club27.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,7 @@ import java.util.UUID;
 
 public class MemyController {
 
+    private final ListService listService;
     private final MemyService service;
 
     @GetMapping("/{memId}")
@@ -35,10 +34,9 @@ public class MemyController {
     }
 
     @GetMapping("/memy")
-    public ResponseEntity<List<MemDto>> getAllMemy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage) {
-        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
-        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
-        log.info("getting memy");
+    public ResponseEntity<List<MemDto>> getAllMemy(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+        int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
+        int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
         var memy = service.getMemy(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(memy, HttpStatus.OK);
     }

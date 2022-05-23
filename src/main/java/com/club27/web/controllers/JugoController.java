@@ -2,7 +2,9 @@ package com.club27.web.controllers;
 
 import com.club27.domain.Jugo;
 import com.club27.services.JugoService;
+import com.club27.services.ListService;
 import com.club27.web.dto.JugoDto;
+import com.club27.web.dto.PageListRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.UUID;
 
 public class JugoController {
 
+    private final ListService listService;
     private final JugoService service;
 
     @GetMapping("/{jugoId}")
@@ -30,10 +33,9 @@ public class JugoController {
     }
 
     @GetMapping("/jugos")
-    public ResponseEntity<List<JugoDto>> getAllSoundboard(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage) {
-        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
-        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
-        log.debug("getting all Jugo");
+    public ResponseEntity<List<JugoDto>> getAllSoundboard(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+        int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
+        int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
         var jugos = service.getJugos(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(jugos, HttpStatus.OK);
     }

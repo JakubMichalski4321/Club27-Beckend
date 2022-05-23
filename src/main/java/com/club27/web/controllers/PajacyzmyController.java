@@ -1,7 +1,9 @@
 package com.club27.web.controllers;
 
 import com.club27.domain.Pajacyzm;
+import com.club27.services.ListService;
 import com.club27.services.PajacyzmyService;
+import com.club27.web.dto.PageListRequestDto;
 import com.club27.web.dto.PajacyzmDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class PajacyzmyController {
 
     private final PajacyzmyService service;
+    private final ListService listService;
 
     @GetMapping("/{pajacyzmId}")
     public ResponseEntity<Pajacyzm> getPajacyzm(@PathVariable("pajacyzmId") UUID id) {
@@ -31,10 +34,9 @@ public class PajacyzmyController {
     }
 
     @GetMapping("/pajacyzmy")
-    public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(@RequestParam(required = false) Integer pageNumber, Integer numberPerPage) {
-        int pageNumberInt = pageNumber != null && pageNumber >= 0 ? pageNumber : 0;
-        int numberPerPageInt = numberPerPage != null && numberPerPage >= 0 ? numberPerPage : 0;
-        log.info("Getting pajacyzmy");
+    public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+        int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
+        int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
         var pajacyzmy = service.getPajacyzmy(pageNumberInt, numberPerPageInt);
         return new ResponseEntity<>(pajacyzmy, HttpStatus.OK);
     }

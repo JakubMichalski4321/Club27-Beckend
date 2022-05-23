@@ -31,9 +31,8 @@ public class SoundboardController {
         return new ResponseEntity<>(soundboard, HttpStatus.OK);
     }
 
-    @GetMapping("/all-soundboard")
+    @GetMapping("/soundboards")
     public ResponseEntity<List<SoundboardDto>> getAllSoundboard() {
-        log.debug("getting all soundboards");
         var soundboards = service.getAllSoundboards();
         return new ResponseEntity<>(soundboards, HttpStatus.OK);
     }
