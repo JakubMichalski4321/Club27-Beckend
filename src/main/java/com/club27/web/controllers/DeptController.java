@@ -16,5 +16,4 @@ public class DeptController {
 
     private final DeptService service;
 
-
 }

@@ -12,6 +12,7 @@ import com.club27.web.dto.MemToUploadDto;
 import com.club27.web.mappers.MemMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,8 @@ public class MemyService {
     }
 
     public List<MemDto> getMemy(int pageNumber, int numberPerPage) {
-        var memy = memyRepository.findAllMemy(PageRequest.of(pageNumber, numberPerPage, Sort.by(Sort.Direction.DESC, "createdDate")));
-        return mapper.mapAll(memy);
+        var memy = memyRepository.findAll(PageRequest.of(pageNumber, numberPerPage, Sort.by(Sort.Direction.DESC, "createdDate")));
+        return mapper.mapAll(memy.getContent());
     }
 
     @Transactional
@@ -55,6 +56,7 @@ public class MemyService {
         memyRepository.save(mem);
     }
 
+    @Transactional
     public void submitFile(MultipartFile file) throws IOException {
         System.out.println("Image upload");
         String saveFileDir = "/var/www/html/assets/memeImages/";

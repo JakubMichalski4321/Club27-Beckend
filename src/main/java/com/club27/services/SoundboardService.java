@@ -18,7 +18,6 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-
 public class SoundboardService {
 
     private final SoundboardRepository soundboardRepository;

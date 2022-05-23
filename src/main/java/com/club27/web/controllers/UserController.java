@@ -1,6 +1,5 @@
 package com.club27.web.controllers;
 
-import com.club27.services.UserDetailsService;
 import com.club27.services.UserService;
 import com.club27.utilities.JwtUtil;
 import com.club27.web.dto.AuthenticationResponse;
@@ -28,7 +27,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtTokenUtil;
     private final UserService userService;
-    private final UserDetailsService userDetailsService;
+    private final UserService userDetailsService;
 
     @PostMapping("/register-user")
     public ResponseEntity<Void> registerUser(@Valid @RequestBody UserDto userDto) {

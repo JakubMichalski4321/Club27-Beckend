@@ -23,14 +23,13 @@ public class JugoService {
     private final JugoRepository jugoRepository;
     private final JugoMapper jugoMapper;
 
-    @Transactional
     public Jugo getJugo(UUID id) {
         return jugoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Jugo not found"));
     }
 
     public List<JugoDto> getJugos(int pageNumberInt, int numberPerPageInt) {
-        var jugos = jugoRepository.findAllJugo(PageRequest.of(pageNumberInt, numberPerPageInt, Sort.by(Sort.Direction.DESC, "createdDate")));
-        return jugoMapper.jugoListToDto(jugos);
+        var jugos = jugoRepository.findAll(PageRequest.of(pageNumberInt, numberPerPageInt, Sort.by(Sort.Direction.DESC, "createdDate")));
+        return jugoMapper.jugoListToDto(jugos.getContent());
     }
 
     @Transactional
