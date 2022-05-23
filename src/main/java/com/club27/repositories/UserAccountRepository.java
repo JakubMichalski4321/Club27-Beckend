@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserAccount, UUID> {
-
+public interface UserAccountRepository extends JpaRepository<UserAccount, UUID> {
     List<UserAccount> findByName(String name);
-
 }

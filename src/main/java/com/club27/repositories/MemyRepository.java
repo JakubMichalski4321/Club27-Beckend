@@ -11,6 +11,4 @@ import java.util.UUID;
 
 @Repository
 public interface MemyRepository extends JpaRepository<Mem, UUID> {
-    @Query("select m from Memy m")
-    List<Mem> findAllMemy(Pageable page);
 }

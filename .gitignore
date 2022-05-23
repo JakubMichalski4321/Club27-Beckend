@@ -29,3 +29,6 @@ target/classes/application.yml
 src/main/resources/application.properties
 target/classes/application.properties
 target/classes/application.yml
+.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_2_0_0_RELEASE.xml
+.idea/misc.xml
+.idea/misc.xml

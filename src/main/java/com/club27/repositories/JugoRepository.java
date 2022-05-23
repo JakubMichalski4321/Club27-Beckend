@@ -11,6 +11,4 @@ import java.util.UUID;
 
 @Repository
 public interface JugoRepository extends JpaRepository<Jugo, UUID> {
-    @Query("Select j From Jugo j")
-    List<Jugo> findAllJugo(Pageable pageable);
 }

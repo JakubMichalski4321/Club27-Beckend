@@ -12,10 +12,5 @@ import java.util.UUID;
 
 @Repository
 public interface PajacyzmyRepository extends JpaRepository<Pajacyzm, UUID> {
-
-    @Query("select p from Pajacyzmy p")
-    List<Pajacyzm> findAllPajacyzmy(Pageable pageable);
-
     Optional<Pajacyzm> getById(UUID id);
-
 }
