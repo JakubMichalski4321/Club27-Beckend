@@ -67,7 +67,7 @@ public class MemyController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{memeId}/comments-all")
+    @GetMapping("/{memeId}/comments")
     public ResponseEntity<List<CommentDto>> getMemeAllComments(@PathVariable("memeId") UUID id) {
         log.debug("getting all comments for meme: " + id);
         var commentsList = service.getThisMemComments(id);
