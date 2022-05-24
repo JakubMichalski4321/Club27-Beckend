@@ -5,6 +5,7 @@ import com.club27.services.ListService;
 import com.club27.services.PajacyzmyService;
 import com.club27.web.dto.PageListRequestDto;
 import com.club27.web.dto.PajacyzmDto;
+import com.club27.web.dto.PajacyzmsWithCounterDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,8 @@ public class PajacyzmyController {
         return new ResponseEntity<>(pajacyzm, HttpStatus.OK);
     }
 
-    @GetMapping("/pajacyzmy")
-    public ResponseEntity<List<PajacyzmDto>> getAllPajacyzmy(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+    @PostMapping("/pajacyzmy")
+    public ResponseEntity<PajacyzmsWithCounterDto> getAllPajacyzmy(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
         int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
         int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
         var pajacyzmy = service.getPajacyzmy(pageNumberInt, numberPerPageInt);

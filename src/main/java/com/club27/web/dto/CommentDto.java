@@ -1,7 +1,9 @@
 package com.club27.web.dto;
 
-import java.sql.Timestamp;
+import lombok.Getter;
 
+import java.sql.Timestamp;
+@Getter
 public record CommentDto(
         String content,
         String author,

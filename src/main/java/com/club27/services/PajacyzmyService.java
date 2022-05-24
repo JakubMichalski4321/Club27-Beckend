@@ -4,6 +4,7 @@ import com.club27.domain.Pajacyzm;
 import com.club27.exception.ObjectNotFoundException;
 import com.club27.repositories.PajacyzmyRepository;
 import com.club27.web.dto.PajacyzmDto;
+import com.club27.web.dto.PajacyzmsWithCounterDto;
 import com.club27.web.mappers.PajacyzmMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +30,10 @@ public class PajacyzmyService {
         return pajacyzm;
     }
 
-    public List<PajacyzmDto> getPajacyzmy(int pageNumberInt, int numberInt) {
+    public PajacyzmsWithCounterDto getPajacyzmy(int pageNumberInt, int numberInt) {
         var pajacyzmy = pajacyzmyRepository.findAll(PageRequest.of(pageNumberInt, numberInt, Sort.by(Sort.Direction.DESC, "createdDate")));
-        return pajacyzmMapper.mapAll(pajacyzmy.getContent());
+        var allPajacyzmyCounter = pajacyzmyRepository.count();
+        return new PajacyzmsWithCounterDto(pajacyzmMapper.mapAll(pajacyzmy.getContent()), allPajacyzmyCounter);
     }
 
     @Transactional
