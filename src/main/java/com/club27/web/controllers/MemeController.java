@@ -22,23 +22,23 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 
-public class MemyController {
+public class MemeController {
 
     private final ListService listService;
     private final MemyService service;
 
-    @GetMapping("/{memId}")
-    public ResponseEntity<Mem> getMem(@PathVariable("memId") UUID id) {
+    @GetMapping("/{memeId}")
+    public ResponseEntity<Mem> getMeme(@PathVariable("memeId") UUID id) {
         var mem = service.getMem(id);
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
 
-    @GetMapping("/memy")
-    public ResponseEntity<List<MemDto>> getAllMemy(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+    @PostMapping("/memes")
+    public ResponseEntity<MemesWithCounterDto> getAllMemes(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
         int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
         int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
-        var memy = service.getMemy(pageNumberInt, numberPerPageInt);
-        return new ResponseEntity<>(memy, HttpStatus.OK);
+        var memes = service.getMemes(pageNumberInt, numberPerPageInt);
+        return new ResponseEntity<>(memes, HttpStatus.OK);
     }
 
     @GetMapping("/{memeId}/like-add")
@@ -49,14 +49,14 @@ public class MemyController {
     }
 
     @PostMapping("/meme-submit")
-    public ResponseEntity<Void> submitMemWithUrl(@Valid @RequestBody MemToUploadDto mem) {
+    public ResponseEntity<Void> submitMemeWithUrl(@Valid @RequestBody MemToUploadDto mem) {
         log.debug("submit mem called, " + mem.toString());
         service.submitMemWithUrl(mem);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/meme-image-submit")
-    public ResponseEntity<Void> submitMemWithImage(@Valid @RequestParam(value = "file") MultipartFile file) {
+    public ResponseEntity<Void> submitMemeWithImage(@Valid @RequestParam(value = "file") MultipartFile file) {
         log.debug("submit file saved called, " + file.toString());
         try {
             service.submitFile(file);

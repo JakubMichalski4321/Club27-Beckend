@@ -5,14 +5,10 @@ import com.club27.domain.Mem;
 import com.club27.exception.ObjectNotFoundException;
 import com.club27.repositories.CommentRepository;
 import com.club27.repositories.MemyRepository;
-import com.club27.web.dto.CommentDto;
-import com.club27.web.dto.CommentToUploadDto;
-import com.club27.web.dto.MemDto;
-import com.club27.web.dto.MemToUploadDto;
+import com.club27.web.dto.*;
 import com.club27.web.mappers.MemMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -39,9 +35,10 @@ public class MemyService {
         return memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
     }
 
-    public List<MemDto> getMemy(int pageNumber, int numberPerPage) {
-        var memy = memyRepository.findAll(PageRequest.of(pageNumber, numberPerPage, Sort.by(Sort.Direction.DESC, "createdDate")));
-        return mapper.mapAll(memy.getContent());
+    public MemesWithCounterDto getMemes(int pageNumber, int numberPerPage) {
+        var memes = memyRepository.findAll(PageRequest.of(pageNumber, numberPerPage, Sort.by(Sort.Direction.DESC, "createdDate")));
+        var allMemesCounter = memyRepository.count();
+        return new MemesWithCounterDto(mapper.mapAll(memes.getContent()), allMemesCounter);
     }
 
     @Transactional
