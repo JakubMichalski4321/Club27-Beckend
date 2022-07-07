@@ -27,8 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/user/register-user",
             "/pajacyzmy/*",
             "/meme/*",
+            "/meme/*/comments",
             "/soundboard/*",
-            "/jugo/*"
+            "/jugo/*",
+            "/dept/*",
+            "/dept/*/*"
     };
 
     @Override

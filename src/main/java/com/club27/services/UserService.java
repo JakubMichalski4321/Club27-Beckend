@@ -3,6 +3,7 @@ package com.club27.services;
 import com.club27.domain.UserAccount;
 import com.club27.exception.UserExistsException;
 import com.club27.repositories.UserAccountRepository;
+import com.club27.web.dto.DeptUserDto;
 import com.club27.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,5 +49,10 @@ public class UserService implements UserDetailsService {
         System.out.println(user.getPass());
         return new org.springframework.security.core.userdetails.User
                 (user.getName(), user.getPass(), new ArrayList<>());
+    }
+
+    public List<DeptUserDto> getAllForDepts() {
+        return userRepository.findAll().stream()
+                .map(userAccount -> new DeptUserDto(userAccount.getId(), userAccount.getName())).toList();
     }
 }

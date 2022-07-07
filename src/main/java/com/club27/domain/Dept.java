@@ -16,6 +16,7 @@ import java.util.List;
 public class Dept extends BaseEntity {
 
     private Double balance;
+    private String deptAccountName;
 
     @ManyToMany(mappedBy = "userDepts")
     private List<UserAccount> userAccounts;
@@ -23,9 +24,10 @@ public class Dept extends BaseEntity {
     @OneToMany(mappedBy = "dept")
     private List<AccountStatement> statements;
 
-    public Dept(Double balance) {
+    public Dept(Double balance, String deptAccountName) {
         super();
         this.balance = balance;
+        this.deptAccountName = deptAccountName;
     }
 
 }
