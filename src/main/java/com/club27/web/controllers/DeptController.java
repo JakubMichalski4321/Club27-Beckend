@@ -1,7 +1,7 @@
 package com.club27.web.controllers;
 
 import com.club27.domain.BaseEntity;
-import com.club27.domain.UserAccount;
+import com.club27.domain.Dept;
 import com.club27.repositories.UserAccountRepository;
 import com.club27.services.DeptService;
 import com.club27.services.UserService;
@@ -30,9 +30,10 @@ public class DeptController {
     private final UserService userService;
     private final UserAccountRepository userAccountRepository;
 
-    @GetMapping("/depts")
-    public ResponseEntity<List<JugoDto>> getDepts(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @GetMapping("/depts/{userId}")
+    public ResponseEntity<List<Dept>> getUserDepts(@PathVariable("userId") String userId) {
+        var userDepts = service.getUserDepts(userId);
+        return new ResponseEntity<>(userDepts, HttpStatus.OK);
     }
 
     @GetMapping("/dept/{id}")
@@ -47,7 +48,7 @@ public class DeptController {
 
     @PostMapping("/create")
     public ResponseEntity<Void> createDept(@Valid @RequestBody DeptCreateAccountDto deptCreateAccountDto) {
-        if(service.createDept(deptCreateAccountDto)){
+        if (service.createDept(deptCreateAccountDto)) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

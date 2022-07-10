@@ -8,7 +8,6 @@ import com.club27.repositories.UserAccountRepository;
 import com.club27.web.dto.DeptCreateAccountDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.control.MappingControl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class DeptService {
     private final UserAccountRepository userAccountRepository;
 
     public boolean createDept(DeptCreateAccountDto dto) {
-        if(dto.deptUsersIds().contains(dto.userId().toString())){
+        if (dto.deptUsersIds().contains(dto.userId().toString())) {
             return false;
         }
 
@@ -46,4 +45,12 @@ public class DeptService {
     }
 
 
+    public List<Dept> getUserDepts(String userId) {
+        var check = deptRepository.findAll().stream()
+                .filter(dept -> dept.getUserAccounts().stream()
+                        .anyMatch(userAccount -> userAccount.getId().equals(UUID.fromString(userId)))).toList();
+        return deptRepository.findAll().stream()
+                .filter(dept -> dept.getUserAccounts().stream()
+                        .anyMatch(userAccount -> userAccount.getId().equals(UUID.fromString(userId)))).toList();
+    }
 }

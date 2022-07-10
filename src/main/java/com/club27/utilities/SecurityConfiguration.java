@@ -31,7 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/soundboard/*",
             "/jugo/*",
             "/dept/*",
-            "/dept/*/*"
+            "/dept/*/*",
+            "/dept/depts/*"
     };
 
     @Override
