@@ -1,5 +1,7 @@
 package com.club27.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class Dept extends BaseEntity {
     private Double balance;
     private String deptAccountName;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "userDepts")
     private List<UserAccount> userAccounts;
 

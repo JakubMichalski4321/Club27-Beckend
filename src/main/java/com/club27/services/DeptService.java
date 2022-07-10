@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,17 +41,17 @@ public class DeptService {
         deptAccount.setUserAccounts(userAccountList);
         deptAccount.setBalance(0.00);
 
+        user1.getUserDepts().add(deptAccount);
+        user2.getUserDepts().add(deptAccount);
+
         deptRepository.save(deptAccount);
+        userAccountRepository.save(user1);
+        userAccountRepository.save(user2);
         return true;
     }
 
 
     public List<Dept> getUserDepts(String userId) {
-        var check = deptRepository.findAll().stream()
-                .filter(dept -> dept.getUserAccounts().stream()
-                        .anyMatch(userAccount -> userAccount.getId().equals(UUID.fromString(userId)))).toList();
-        return deptRepository.findAll().stream()
-                .filter(dept -> dept.getUserAccounts().stream()
-                        .anyMatch(userAccount -> userAccount.getId().equals(UUID.fromString(userId)))).toList();
+        return Optional.of(userAccountRepository.getOne(UUID.fromString(userId))).map(UserAccount::getUserDepts).orElseThrow();
     }
 }
