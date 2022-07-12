@@ -7,9 +7,10 @@ import java.util.UUID;
 @Getter
 public record DeptDto(
         UUID deptId,
+        String title,
         Timestamp createdDate,
         Double balance,
-        UUID user1,
-        UUID user2
+        String user1Name,
+        String user2Name
 ) {
 }

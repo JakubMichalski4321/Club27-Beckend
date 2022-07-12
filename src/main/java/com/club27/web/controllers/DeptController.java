@@ -5,10 +5,7 @@ import com.club27.domain.Dept;
 import com.club27.repositories.UserAccountRepository;
 import com.club27.services.DeptService;
 import com.club27.services.UserService;
-import com.club27.web.dto.DeptCreateAccountDto;
-import com.club27.web.dto.DeptUserDto;
-import com.club27.web.dto.JugoDto;
-import com.club27.web.dto.PageListRequestDto;
+import com.club27.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,19 +27,21 @@ public class DeptController {
     private final UserService userService;
     private final UserAccountRepository userAccountRepository;
 
-    @GetMapping("/depts/{userId}")
-    public ResponseEntity<List<Dept>> getUserDepts(@PathVariable("userId") String userId) {
+    @GetMapping("/list/{userId}")
+    public ResponseEntity<List<DeptDto>> getUserDepts(@PathVariable("userId") String userId) {
         var userDepts = service.getUserDepts(userId);
         return new ResponseEntity<>(userDepts, HttpStatus.OK);
     }
 
-    @GetMapping("/dept/{id}")
-    public ResponseEntity<List<JugoDto>> getDept(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @GetMapping("/{accountId}")
+    public ResponseEntity<Dept> getDept(@PathVariable("accountId") String accountId) {
+        var userDept = service.getUserDept(accountId);
+        return new ResponseEntity<>(userDept, HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<Void> updateDept(@Valid @RequestBody JugoDto jugoDto) {
+    @PostMapping("/addStatement")
+    public ResponseEntity<Void> addStatement(@Valid @RequestBody AddStatementDto addStatementDto) {
+        service.saveNewStatement(addStatementDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

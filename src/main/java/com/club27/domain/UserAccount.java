@@ -19,6 +19,7 @@ public class UserAccount extends BaseEntity {
             name = "user_depts",
             joinColumns = @JoinColumn(name = "user_account_id"),
             inverseJoinColumns = @JoinColumn(name = "dept_id"))
+    @JsonIgnore
     List<Dept> userDepts;
     private String name;
     private String pass;
