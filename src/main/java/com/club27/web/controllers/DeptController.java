@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,13 +30,13 @@ public class DeptController {
     private final UserAccountRepository userAccountRepository;
 
     @GetMapping("/list/{userId}")
-    public ResponseEntity<List<DeptDto>> getUserDepts(@PathVariable("userId") String userId) {
+    public ResponseEntity<List<DeptDto>> getUserDepts(@PathVariable("userId") @NotBlank String userId) {
         var userDepts = service.getUserDepts(userId);
         return new ResponseEntity<>(userDepts, HttpStatus.OK);
     }
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<Dept> getDept(@PathVariable("accountId") String accountId) {
+    public ResponseEntity<Dept> getDept(@PathVariable("accountId") @NotBlank String accountId) {
         var userDept = service.getDeptAccountDetails(accountId);
         return new ResponseEntity<>(userDept, HttpStatus.OK);
     }
@@ -53,10 +55,11 @@ public class DeptController {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PostMapping("/remove")
-    public ResponseEntity<Void> removeDept(@Valid @RequestBody JugoDto jugoDto) {
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+/*    @GetMapping("/deleteDept/{accountId}")
+    public ResponseEntity<String> deleteDept(@PathVariable("accountId") @NotBlank String accountId) {
+        var response = service.deleteDept(accountId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }*/
 
     @GetMapping("/deptsusers")
     public ResponseEntity<List<DeptUserDto>> getDeptUsers() {
@@ -65,7 +68,7 @@ public class DeptController {
     }
 
     @GetMapping("/getUserIdByName/{userName}")
-    public ResponseEntity<UUID> getDeptUsers(@PathVariable("userName") String userName) {
+    public ResponseEntity<UUID> getDeptUsers(@PathVariable("userName") @NotBlank String userName) {
         var userId = userAccountRepository.findByName(userName).stream()
                 .map(BaseEntity::getId)
                 .findFirst()

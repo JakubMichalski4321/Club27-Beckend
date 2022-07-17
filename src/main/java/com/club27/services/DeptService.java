@@ -7,6 +7,7 @@ import com.club27.domain.UserAccount;
 import com.club27.repositories.AccountStatementRepository;
 import com.club27.repositories.DeptRepository;
 import com.club27.repositories.UserAccountRepository;
+import com.club27.utilities.JwtUtil;
 import com.club27.web.dto.AddStatementDto;
 import com.club27.web.dto.DeptAccountDetailsDto;
 import com.club27.web.dto.DeptCreateAccountDto;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -27,6 +29,7 @@ public class DeptService {
     private final AccountStatementRepository accountStatementRepository;
     private final UserAccountRepository userAccountRepository;
 
+    @Transactional
     public boolean createDept(DeptCreateAccountDto dto) {
         if (dto.deptUsersIds().contains(dto.userId().toString())) {
             return false;
@@ -97,5 +100,22 @@ public class DeptService {
         var dept = deptRepository.findById(UUID.fromString(accountId)).orElseThrow();
         dept.getStatements().sort(Comparator.comparing(BaseEntity::getCreatedDate).reversed());
         return dept;
+    }
+
+    @Transactional
+    public String deleteDept(String deptAccountId) {
+        var dept = deptRepository.findById(UUID.fromString(deptAccountId)).orElseThrow();
+        var statements = accountStatementRepository.findAll().stream()
+                .filter(statement -> statement.getDept().getId().equals(dept.getId())).toList();
+        var users = userAccountRepository.findAll().stream()
+                .filter(userAccount -> userAccount.getUserDepts().contains(dept)).toList();
+        //Constrains... users update
+        accountStatementRepository.deleteAll(statements);
+        deptRepository.delete(dept);
+
+
+        accountStatementRepository.flush();
+        deptRepository.flush();
+        return "Konto zostało pomyślnie usniętę";
     }
 }

@@ -32,7 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/jugo/*",
             "/dept/*",
             "/dept/*/*",
-            "/dept/depts/*"
+            "/dept/depts/*",
+            "/dept/deleteDept"
     };
 
     @Override

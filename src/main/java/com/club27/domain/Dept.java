@@ -31,4 +31,6 @@ public class Dept extends BaseEntity {
         this.deptAccountName = deptAccountName;
     }
 
+    private String requestToRemove;
+
 }
