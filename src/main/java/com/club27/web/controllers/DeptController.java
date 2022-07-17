@@ -35,7 +35,7 @@ public class DeptController {
 
     @GetMapping("/{accountId}")
     public ResponseEntity<Dept> getDept(@PathVariable("accountId") String accountId) {
-        var userDept = service.getUserDept(accountId);
+        var userDept = service.getDeptAccountDetails(accountId);
         return new ResponseEntity<>(userDept, HttpStatus.OK);
     }
 

@@ -1,12 +1,14 @@
 package com.club27.services;
 
 import com.club27.domain.AccountStatement;
+import com.club27.domain.BaseEntity;
 import com.club27.domain.Dept;
 import com.club27.domain.UserAccount;
 import com.club27.repositories.AccountStatementRepository;
 import com.club27.repositories.DeptRepository;
 import com.club27.repositories.UserAccountRepository;
 import com.club27.web.dto.AddStatementDto;
+import com.club27.web.dto.DeptAccountDetailsDto;
 import com.club27.web.dto.DeptCreateAccountDto;
 import com.club27.web.dto.DeptDto;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -86,11 +84,18 @@ public class DeptService {
         UserAccount deptUser = userAccountRepository.getOne(UUID.fromString(dto.deptUserId()));
         accountStatement.setDeptUserId(deptUser.getId().toString());
 
+        dept.getStatements().add(accountStatement);
+
         accountStatementRepository.save(accountStatement);
+        accountStatementRepository.flush();
+
+        deptRepository.save(dept);
+        deptRepository.flush();
     }
 
-    public Dept getUserDept(String accountId) {
-        var check = deptRepository.getOne(UUID.fromString(accountId));
-        return deptRepository.getOne(UUID.fromString(accountId));
+    public Dept getDeptAccountDetails(String accountId) {
+        var dept = deptRepository.findById(UUID.fromString(accountId)).orElseThrow();
+        dept.getStatements().sort(Comparator.comparing(BaseEntity::getCreatedDate).reversed());
+        return dept;
     }
 }

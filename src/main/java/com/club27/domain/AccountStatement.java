@@ -1,14 +1,14 @@
 package com.club27.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor(force = true)
 @Entity(name = "account_statement")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -21,6 +21,7 @@ public class AccountStatement extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "dept_id", nullable = false)
+    @JsonIgnore
     private Dept dept;
 
     public AccountStatement(Double amount, String title, String description, String deptUserId, Dept dept) {

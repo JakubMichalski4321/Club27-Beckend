@@ -2,16 +2,15 @@ package com.club27.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor(force = true)
 @Entity(name = "dept")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -20,7 +19,6 @@ public class Dept extends BaseEntity {
     private Double balance;
     private String deptAccountName;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "userDepts")
     private List<UserAccount> userAccounts;
 
