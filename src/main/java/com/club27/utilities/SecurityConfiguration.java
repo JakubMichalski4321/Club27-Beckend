@@ -30,10 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/meme/*/comments",
             "/soundboard/*",
             "/jugo/*",
-            "/dept/*",
-            "/dept/*/*",
-            "/dept/depts/*",
-            "/dept/deleteDept"
     };
 
     @Override

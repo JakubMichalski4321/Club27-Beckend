@@ -56,7 +56,6 @@ public class DeptService {
         return true;
     }
 
-
     public List<DeptDto> getUserDepts(String userId) {
         List<DeptDto> deptDtoList = new ArrayList<>();
         var deptList =  Optional.of(userAccountRepository.getOne(UUID.fromString(userId))).map(UserAccount::getUserDepts).orElseThrow();

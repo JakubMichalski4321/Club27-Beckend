@@ -42,8 +42,8 @@ public class UserController {
         return new ResponseEntity<>(userExists, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDto loginDto) throws Exception {
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginDto loginDto) throws Exception {
         log.info("Login attempt for user: " + loginDto.username());
         try {
             authenticationManager.authenticate(
@@ -56,7 +56,8 @@ public class UserController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.username());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         log.info("Login attempt successful for user: " + loginDto.username());
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwt);
+        return new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }
 
 }
