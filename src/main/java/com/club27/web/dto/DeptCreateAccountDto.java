@@ -11,6 +11,7 @@ public record DeptCreateAccountDto(
         @NotBlank
         String accountName,
         @NotBlank
+        @NotNull
         UUID userId,
         @NotNull
         @NotEmpty

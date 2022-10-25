@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/pajacyzmy")
 @Slf4j
 @RequiredArgsConstructor

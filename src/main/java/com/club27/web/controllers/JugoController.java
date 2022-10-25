@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/jugo")
+@CrossOrigin
 @Slf4j
 @RequiredArgsConstructor
 

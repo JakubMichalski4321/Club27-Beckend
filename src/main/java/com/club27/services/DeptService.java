@@ -28,6 +28,9 @@ public class DeptService {
 
     @Transactional
     public boolean createDept(DeptCreateAccountDto dto) {
+        if(dto.userId() == null) {
+            return false;
+        }
         if (dto.deptUsersIds().contains(dto.userId().toString())) {
             return false;
         }
