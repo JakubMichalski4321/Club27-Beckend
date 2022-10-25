@@ -10,16 +10,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/dept")
 @Slf4j
 @RequiredArgsConstructor
@@ -29,15 +29,15 @@ public class DeptController {
     private final UserService userService;
     private final UserAccountRepository userAccountRepository;
 
-    @GetMapping("/list/{userId}")
-    public ResponseEntity<List<DeptDto>> getUserDepts(@PathVariable("userId") @NotBlank String userId) {
-        var userDepts = service.getUserDepts(userId);
+    @PostMapping("/list")
+    public ResponseEntity<List<DeptDto>> getUserDepts(@Valid StringDto req) {
+        var userDepts = service.getUserDepts(req.value());
         return new ResponseEntity<>(userDepts, HttpStatus.OK);
     }
 
-    @GetMapping("/{accountId}")
-    public ResponseEntity<Dept> getDept(@PathVariable("accountId") @NotBlank String accountId) {
-        var userDept = service.getDeptAccountDetails(accountId);
+    @PostMapping("/account")
+    public ResponseEntity<Dept> getDept(@Valid StringDto req) {
+        var userDept = service.getDeptAccountDetails(req.value());
         return new ResponseEntity<>(userDept, HttpStatus.OK);
     }
 
@@ -61,15 +61,15 @@ public class DeptController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }*/
 
-    @GetMapping("/deptsusers")
+    @PostMapping("/deptsusers")
     public ResponseEntity<List<DeptUserDto>> getDeptUsers() {
         var deptUsers = userService.getAllForDepts();
         return new ResponseEntity<>(deptUsers, HttpStatus.OK);
     }
 
-    @GetMapping("/getUserIdByName/{userName}")
-    public ResponseEntity<UUID> getDeptUsers(@PathVariable("userName") @NotBlank String userName) {
-        var userId = userAccountRepository.findByName(userName).stream()
+    @PostMapping("/getUserIdByName")
+    public ResponseEntity<UUID> getDeptUsers(@Valid StringDto req) {
+        var userId = userAccountRepository.findByName(req.value()).stream()
                 .map(BaseEntity::getId)
                 .findFirst()
                 .orElse(null);

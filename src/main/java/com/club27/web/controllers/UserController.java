@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/user")
 @Slf4j
 @RequiredArgsConstructor
@@ -27,12 +26,11 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtTokenUtil;
     private final UserService userService;
-    private final UserService userDetailsService;
 
     @PostMapping("/register-user")
     public ResponseEntity<Void> registerUser(@Valid @RequestBody UserDto userDto) {
-        userService.registerNewUser(userDto);
         log.debug("register new user " + userDto.username());
+        userService.registerNewUser(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -53,9 +51,10 @@ public class UserController {
             log.warn("Login attempt failed for user: " + loginDto.username());
             throw new Exception("Incorrect credentials", badCredentialsException);
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.username());
+        final UserDetails userDetails = userService.loadUserByUsername(loginDto.username());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         log.info("Login attempt successful for user: " + loginDto.username());
+        log.info("JWT: " + jwt);
         AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwt);
         return new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }

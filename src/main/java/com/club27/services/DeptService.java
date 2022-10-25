@@ -7,9 +7,7 @@ import com.club27.domain.UserAccount;
 import com.club27.repositories.AccountStatementRepository;
 import com.club27.repositories.DeptRepository;
 import com.club27.repositories.UserAccountRepository;
-import com.club27.utilities.JwtUtil;
 import com.club27.web.dto.AddStatementDto;
-import com.club27.web.dto.DeptAccountDetailsDto;
 import com.club27.web.dto.DeptCreateAccountDto;
 import com.club27.web.dto.DeptDto;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -58,6 +55,9 @@ public class DeptService {
 
     public List<DeptDto> getUserDepts(String userId) {
         List<DeptDto> deptDtoList = new ArrayList<>();
+        if(userId == null) {
+            return deptDtoList;
+        }
         var deptList =  Optional.of(userAccountRepository.getOne(UUID.fromString(userId))).map(UserAccount::getUserDepts).orElseThrow();
         deptList.forEach(dept -> {
             DeptDto dto = new DeptDto(

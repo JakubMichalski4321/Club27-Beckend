@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/meme")
 @Slf4j
 @RequiredArgsConstructor
