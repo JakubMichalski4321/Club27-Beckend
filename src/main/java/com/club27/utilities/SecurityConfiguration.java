@@ -31,8 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/pajacyzmy/*",
             "/meme/*",
             "/meme/*/comments",
+            "/meme/*/like-add",
             "/soundboard/*",
             "/jugo/*",
+            "/jugo/*/like-add",
     };
 
     @Override
