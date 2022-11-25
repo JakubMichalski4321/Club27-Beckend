@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/soundboard/*",
             "/jugo/*",
             "/jugo/*/like-add",
+            "/meme/meme-image-submit",
     };
 
     @Override

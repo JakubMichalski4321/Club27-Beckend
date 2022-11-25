@@ -4,6 +4,7 @@ import com.club27.domain.Mem;
 import com.club27.services.ListService;
 import com.club27.services.MemyService;
 import com.club27.web.dto.*;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -49,22 +50,23 @@ public class MemeController {
     }
 
     @PostMapping("/meme-submit")
-    public ResponseEntity<Void> submitMemeWithUrl(@Valid @RequestBody MemToUploadDto mem) {
+    public ResponseEntity<StringWrapper> submitMemeWithUrl(@Valid @RequestBody MemToUploadDto mem) {
         log.debug("submit mem called, " + mem.toString());
         service.submitMemWithUrl(mem);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(new StringWrapper("true"), HttpStatus.CREATED);
     }
 
     @PostMapping("/meme-image-submit")
-    public ResponseEntity<Void> submitMemeWithImage(@Valid @RequestParam(value = "file") MultipartFile file) {
+    public ResponseEntity<StringWrapper> submitMemeWithImage(@Valid @RequestParam(value = "file") MultipartFile file, @Valid @RequestParam(value = "meme") String memeJson) {
         log.debug("submit file saved called, " + file.toString());
         try {
+            service.submitMemWithUrl(new Gson().fromJson(memeJson, MemToUploadDto.class));
             service.submitFile(file);
+            return new ResponseEntity<>(new StringWrapper("true"), HttpStatus.CREATED);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.valueOf("File save failed"));
+            return new ResponseEntity<>(new StringWrapper("false"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{memeId}/comments")
