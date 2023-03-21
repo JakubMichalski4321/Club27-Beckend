@@ -22,6 +22,7 @@ public class UserAccount extends BaseEntity {
     @JsonIgnore
     List<Dept> userDepts;
     private String name;
+    @JsonIgnore
     private String pass;
 
     public UserAccount(UUID id, String name, String pass) {
