@@ -77,10 +77,13 @@ public class DietService {
             dietStatementRepository.save(newDietStatement);
             dietRepository.flush();
             return "Saved";
-        } else if (!isAddedToday(lastDietStatement.get(0).getCreatedDate())) {
+        } else if (isAddedToday(lastDietStatement.get(0).getCreatedDate())) {
             return "Already added today";
+        } else {
+            dietStatementRepository.save(newDietStatement);
+            dietRepository.flush();
+            return "Saved";
         }
-        return "Cannot save statement";
     }
 
     private boolean isAddedToday(Timestamp createdDate) {
