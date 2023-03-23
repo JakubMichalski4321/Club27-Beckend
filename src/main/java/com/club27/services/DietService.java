@@ -53,6 +53,7 @@ public class DietService {
         newDiet.setDietBalance(addDietAccountDto.currentWeight());
         newDiet.setDietName(addDietAccountDto.dietName());
         newDiet.setUserAccount(user);
+        newDiet.setHeight(addDietAccountDto.currentHeight());
         dietRepository.save(newDiet);
         dietRepository.flush();
         addFirstDietStatement(newDiet);
