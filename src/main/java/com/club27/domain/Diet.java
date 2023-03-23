@@ -13,6 +13,7 @@ import java.util.List;
 public class Diet extends BaseEntity{
     private String dietName;
     private Double dietBalance;
+    private Double height;
     @OneToOne
     private UserAccount userAccount;
     @OneToMany(mappedBy = "diet")
