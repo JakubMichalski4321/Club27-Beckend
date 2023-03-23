@@ -56,7 +56,7 @@ public class MemyService {
     @Transactional
     public void submitFile(MultipartFile file) throws IOException {
         System.out.println("Image upload");
-        String saveFileDir = "C:\\Users\\Geralt\\Desktop\\Club27-Frontend\\src\\assets\\memeImages\\";
+        String saveFileDir = "/var/www/klub27/html/assets/memeImages/";
         byte[] fileInBytes = file.getBytes();
         Path path = Paths.get(saveFileDir + file.getOriginalFilename());
         Files.write(path, fileInBytes);
