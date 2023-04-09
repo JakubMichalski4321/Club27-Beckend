@@ -41,7 +41,7 @@ public class SoundboardService {
     }
 
     public void submitSoundboardSound(MultipartFile file) throws IOException {
-        String saveFileDir = "/var/www/html/assets/soundboardSounds/" + file.getOriginalFilename();
+        String saveFileDir = "/var/www/klub27/html/assets/soundboardSounds/" + file.getOriginalFilename();
         file.transferTo(new File(saveFileDir));
     }
 
