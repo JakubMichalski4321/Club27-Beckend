@@ -31,8 +31,8 @@ public class MemyService {
     private final CommentRepository commentRepository;
     private final MemMapper mapper;
 
-    public Mem getMem(UUID id) {
-        return memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!"));
+    public MemDto getMem(UUID id) {
+        return mapper.memToDto(memyRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Meme not found!")));
     }
 
     public MemesWithCounterDto getMemes(int pageNumber, int numberPerPage) {

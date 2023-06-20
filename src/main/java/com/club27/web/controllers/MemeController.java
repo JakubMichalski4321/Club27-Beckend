@@ -29,7 +29,7 @@ public class MemeController {
     private final MemyService service;
 
     @GetMapping("/{memeId}")
-    public ResponseEntity<Mem> getMeme(@PathVariable("memeId") UUID id) {
+    public ResponseEntity<MemDto> getMeme(@PathVariable("memeId") UUID id) {
         var mem = service.getMem(id);
         return new ResponseEntity<>(mem, HttpStatus.OK);
     }
