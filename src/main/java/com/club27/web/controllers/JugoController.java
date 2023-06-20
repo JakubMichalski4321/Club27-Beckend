@@ -4,6 +4,7 @@ import com.club27.domain.Jugo;
 import com.club27.services.JugoService;
 import com.club27.services.ListService;
 import com.club27.web.dto.JugoDto;
+import com.club27.web.dto.JugosWithCounterDto;
 import com.club27.web.dto.PageListRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/jugo")
 @CrossOrigin
+@RequestMapping("/jugo")
 @Slf4j
 @RequiredArgsConstructor
 
@@ -32,8 +33,8 @@ public class JugoController {
         return new ResponseEntity<>(jugo, HttpStatus.OK);
     }
 
-    @GetMapping("/jugos")
-    public ResponseEntity<List<JugoDto>> getAllSoundboard(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
+    @PostMapping("/jugos")
+    public ResponseEntity<JugosWithCounterDto> getAllJugos(@RequestBody(required = false) PageListRequestDto pageListRequestDto) {
         int pageNumberInt = listService.validatePageListRequestPageDisplay(pageListRequestDto);
         int numberPerPageInt = listService.validatePageListRequestItemsPerPage(pageListRequestDto);
         var jugos = service.getJugos(pageNumberInt, numberPerPageInt);
@@ -41,10 +42,10 @@ public class JugoController {
     }
 
     @PostMapping("/jugo-submit")
-    public ResponseEntity<Void> submitJugo(@Valid @RequestBody JugoDto jugoDto) {
+    public ResponseEntity<Boolean> submitJugo(@Valid @RequestBody JugoDto jugoDto) {
         log.debug("submit jugo called, " + jugoDto.toString());
         service.submitJugo(jugoDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(true, HttpStatus.CREATED);
     }
 
     @GetMapping("/{jugoId}/like-add")
