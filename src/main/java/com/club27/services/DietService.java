@@ -69,6 +69,7 @@ public class DietService {
 
     public String addDietStatement(AddDietStatementDto addDietStatementDto) {
         Diet diet = dietRepository.findById(UUID.fromString(addDietStatementDto.dietId())).orElseThrow(() -> new ObjectNotFoundException("Diet not found!"));
+        diet.setDietBalance(addDietStatementDto.weight());
         DietStatement newDietStatement = new DietStatement(addDietStatementDto.weight(), addDietStatementDto.description(), diet);
         List<DietStatement> lastDietStatement = dietStatementRepository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "createdDate")))
                 .stream()
@@ -76,6 +77,7 @@ public class DietService {
                 .toList();
         if(CollectionUtils.isEmpty(lastDietStatement)) {
             dietStatementRepository.save(newDietStatement);
+            dietRepository.save(diet);
             dietRepository.flush();
             return "Saved";
         } else if (isAddedToday(lastDietStatement.get(0).getCreatedDate())) {
